@@ -1,0 +1,1174 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"> 
+
+<script>
+    // <!-- Google Tag Manager -->
+    // (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    //     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    //     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    //     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    // })
+    // (window,document,'script','dataLayer','GTM-MQVFZMQ');
+    // <!-- End Google Tag Manager -->
+
+function dataPushInTagManager(event , eventCategory , eventAction , eventLabel , userId){
+        // send conversion data to algolia
+        if(typeof sendAlgoliaConversion === "function" && eventCategory == "LeadSignup"){
+            sendAlgoliaConversion('LeadSignup - ' + eventAction);
+        }
+
+        if(eventLabel == "undefined" || eventLabel == " "){
+            eventLabel = $(location).attr("href");
+        }
+        if(userId == null){
+            dataLayer.push({
+            'event': event,
+            'eventCategory':eventCategory,
+            'eventAction':eventAction,
+            'eventLabel':eventLabel,
+            });
+        }else{
+            dataLayer.push({
+            'event': event,
+            'eventCategory':eventCategory,
+            'eventAction':eventAction,
+            'eventLabel':eventLabel,
+            'userId':userId
+            });
+
+            // fire ViewCourse manually with LeadSignup event and userId is present
+            if(eventCategory === "LeadSignup"){
+                eventCategory = "ViewCourse";
+                eventAction = "PageLoad";
+                dataLayer.push({
+                    'event': event,
+                    'eventCategory':eventCategory,
+                    'eventAction':eventAction,
+                    'eventLabel':eventLabel,
+                    'userId':userId
+                });
+            }
+        }
+}
+// function dataPushInTagManagerPurchase(postorderinfo) {
+
+//     if(document.getElementById('dataPushInTagManagerPurchase').value == 0){
+//        document.getElementById('dataPushInTagManagerPurchase').value = 1;
+//         dataLayer.push({
+//             'event': 'transactionComplete',
+//             'ecommerce': {
+//                 'currencyCode': postorderinfo.currency,
+//                 'purchase': {
+//                     'actionField':
+//                             {
+//                                 'id': postorderinfo.orderid,
+//     // Transaction ID. Required for purchases.
+//                                 'revenue': postorderinfo.final_value,
+//     // Total transaction value (incl. tax and shipping)
+//                                 'tax':  postorderinfo.servicetax_value,
+//     // if any else 0
+//                                 'shipping': 0,
+//     // if any else 0
+//                             },
+//                     'products': [{
+//                             'name': postorderinfo.courseAnalyticTitle, // COURSE NAME
+//                             'id': postorderinfo.courseid,
+//     // COURSE ID
+//                             'price':  postorderinfo.original_value,
+//     // COURSE PRICE
+//                             'quantity': 1,
+//                         }, ]
+//                 }
+//             }
+//         });
+//     }
+// }
+
+//     // fire GTM to load plugins
+//     dataPushInTagManager("EventsToSend", "LoadPlugins","LoadPlugins","ECOM", null);
+
+</script>
+
+
+    
+    <!-- Hotjar Tracking Code for Edureka -->
+    <!-- <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1826269,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+
+        // hj('trigger', 'homepage_test');
+    </script> -->
+
+
+    <style>
+ /* MINIFIED FIRST FOLD CSS */ 
+html {font-family:"Open Sans", sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:12px;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}body {font-family:"Open Sans", sans-serif;font-size:14px;line-height:1.42857143;color:#333;background-color:#fff;margin:0;}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {display:block;}.hidden {display:none !important;}.hide {display:none !important;}.show {display:block !important;}audio,canvas,progress,video {display:inline-block;vertical-align:baseline;}audio:not([controls]) {display:none;height:0;}[hidden],template {display:none;}a {background-color:transparent;}a:active,a:hover {outline:0;}* {-webkit-box-sizing:border-box; -moz-box-sizing:border-box;box-sizing:border-box;}*:before,*:after {-webkit-box-sizing:border-box; -moz-box-sizing:border-box;box-sizing:border-box;}.container {padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}@media (min-width:768px) {.container {width:750px;}}@media (min-width:992px) {.container {width:970px;}}@media (min-width:1200px) {.container {width:1170px;}}.nav {padding-left:0;margin-bottom:0;list-style:none;}.navbar {position:relative;min-height:50px;margin-bottom:20px;border:1px solid transparent;}.navbar-fixed-top,.navbar-fixed-bottom {position:fixed;right:0;left:0;z-index:1030;}.navbar-fixed-top {top:0;border-width:0 0 1px;}.navbar-nav {margin:7.5px -15px;}.navbar-nav > li > a {padding-top:10px;padding-bottom:10px;line-height:20px;}@media (max-width:767px) {.navbar-nav .open .dropdown-menu {position:static;float:none;width:auto;margin-top:0;background-color:transparent;border:0;-webkit-box-shadow:none;box-shadow:none;}.navbar-nav .open .dropdown-menu > li > a,.navbar-nav .open .dropdown-menu .dropdown-header {padding:5px 15px 5px 25px;}.navbar-nav .open .dropdown-menu > li > a {line-height:20px;}.navbar-nav .open .dropdown-menu > li > a:hover,.navbar-nav .open .dropdown-menu > li > a:focus {background-image:none;}}@media (min-width:768px) {.navbar-nav {float:left;margin:0;}.navbar-nav > li {float:left;}.navbar-nav > li > a {padding-top:15px;padding-bottom:15px;}}@media (min-width:768px) {.navbar-right .dropdown-menu {right:0;left:auto;}.navbar-right .dropdown-menu-left {right:auto;left:0;}}@media (min-width:768px) {.navbar-left {float:left !important;}.navbar-right {float:right !important;margin-right:-15px;}.navbar-right ~ .navbar-right {margin-right:0;}}.container-fluid {padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}.row {margin-right:-15px;margin-left:-15px;}.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {position:relative;min-height:1px;padding-right:15px;padding-left:15px;}.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {float:left;}.col-xs-12 {width:100%;}.col-xs-11 {width:91.66666667%;}.col-xs-10 {width:83.33333333%;}.col-xs-9 {width:75%;}.col-xs-8 {width:66.66666667%;}.col-xs-7 {width:58.33333333%;}.col-xs-6 {width:50%;}.col-xs-5 {width:41.66666667%;}.col-xs-4 {width:33.33333333%;}.col-xs-3 {width:25%;}.col-xs-2 {width:16.66666667%;}.col-xs-1 {width:8.33333333%;}.col-xs-pull-12 {right:100%;}.col-xs-pull-11 {right:91.66666667%;}.col-xs-pull-10 {right:83.33333333%;}.col-xs-pull-9 {right:75%;}.col-xs-pull-8 {right:66.66666667%;}.col-xs-pull-7 {right:58.33333333%;}.col-xs-pull-6 {right:50%;}.col-xs-pull-5 {right:41.66666667%;}.col-xs-pull-4 {right:33.33333333%;}.col-xs-pull-3 {right:25%;}.col-xs-pull-2 {right:16.66666667%;}.col-xs-pull-1 {right:8.33333333%;}.col-xs-pull-0 {right:auto;}.col-xs-push-12 {left:100%;}.col-xs-push-11 {left:91.66666667%;}.col-xs-push-10 {left:83.33333333%;}.col-xs-push-9 {left:75%;}.col-xs-push-8 {left:66.66666667%;}.col-xs-push-7 {left:58.33333333%;}.col-xs-push-6 {left:50%;}.col-xs-push-5 {left:41.66666667%;}.col-xs-push-4 {left:33.33333333%;}.col-xs-push-3 {left:25%;}.col-xs-push-2 {left:16.66666667%;}.col-xs-push-1 {left:8.33333333%;}.col-xs-push-0 {left:auto;}.col-xs-offset-12 {margin-left:100%;}.col-xs-offset-11 {margin-left:91.66666667%;}.col-xs-offset-10 {margin-left:83.33333333%;}.col-xs-offset-9 {margin-left:75%;}.col-xs-offset-8 {margin-left:66.66666667%;}.col-xs-offset-7 {margin-left:58.33333333%;}.col-xs-offset-6 {margin-left:50%;}.col-xs-offset-5 {margin-left:41.66666667%;}.col-xs-offset-4 {margin-left:33.33333333%;}.col-xs-offset-3 {margin-left:25%;}.col-xs-offset-2 {margin-left:16.66666667%;}.col-xs-offset-1 {margin-left:8.33333333%;}.col-xs-offset-0 {margin-left:0;}@media (min-width:768px) {.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {float:left;}.col-sm-12 {width:100%;}.col-sm-11 {width:91.66666667%;}.col-sm-10 {width:83.33333333%;}.col-sm-9 {width:75%;}.col-sm-8 {width:66.66666667%;}.col-sm-7 {width:58.33333333%;}.col-sm-6 {width:50%;}.col-sm-5 {width:41.66666667%;}.col-sm-4 {width:33.33333333%;}.col-sm-3 {width:25%;}.col-sm-2 {width:16.66666667%;}.col-sm-1 {width:8.33333333%;}.col-sm-pull-12 {right:100%;}.col-sm-pull-11 {right:91.66666667%;}.col-sm-pull-10 {right:83.33333333%;}.col-sm-pull-9 {right:75%;}.col-sm-pull-8 {right:66.66666667%;}.col-sm-pull-7 {right:58.33333333%;}.col-sm-pull-6 {right:50%;}.col-sm-pull-5 {right:41.66666667%;}.col-sm-pull-4 {right:33.33333333%;}.col-sm-pull-3 {right:25%;}.col-sm-pull-2 {right:16.66666667%;}.col-sm-pull-1 {right:8.33333333%;}.col-sm-pull-0 {right:auto;}.col-sm-push-12 {left:100%;}.col-sm-push-11 {left:91.66666667%;}.col-sm-push-10 {left:83.33333333%;}.col-sm-push-9 {left:75%;}.col-sm-push-8 {left:66.66666667%;}.col-sm-push-7 {left:58.33333333%;}.col-sm-push-6 {left:50%;}.col-sm-push-5 {left:41.66666667%;}.col-sm-push-4 {left:33.33333333%;}.col-sm-push-3 {left:25%;}.col-sm-push-2 {left:16.66666667%;}.col-sm-push-1 {left:8.33333333%;}.col-sm-push-0 {left:auto;}.col-sm-offset-12 {margin-left:100%;}.col-sm-offset-11 {margin-left:91.66666667%;}.col-sm-offset-10 {margin-left:83.33333333%;}.col-sm-offset-9 {margin-left:75%;}.col-sm-offset-8 {margin-left:66.66666667%;}.col-sm-offset-7 {margin-left:58.33333333%;}.col-sm-offset-6 {margin-left:50%;}.col-sm-offset-5 {margin-left:41.66666667%;}.col-sm-offset-4 {margin-left:33.33333333%;}.col-sm-offset-3 {margin-left:25%;}.col-sm-offset-2 {margin-left:16.66666667%;}.col-sm-offset-1 {margin-left:8.33333333%;}.col-sm-offset-0 {margin-left:0;}}@media (min-width:992px) {.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {float:left;}.col-md-12 {width:100%;}.col-md-11 {width:91.66666667%;}.col-md-10 {width:83.33333333%;}.col-md-9 {width:75%;}.col-md-8 {width:66.66666667%;}.col-md-7 {width:58.33333333%;}.col-md-6 {width:50%;}.col-md-5 {width:41.66666667%;}.col-md-4 {width:33.33333333%;}.col-md-3 {width:25%;}.col-md-2 {width:16.66666667%;}.col-md-1 {width:8.33333333%;}.col-md-pull-12 {right:100%;}.col-md-pull-11 {right:91.66666667%;}.col-md-pull-10 {right:83.33333333%;}.col-md-pull-9 {right:75%;}.col-md-pull-8 {right:66.66666667%;}.col-md-pull-7 {right:58.33333333%;}.col-md-pull-6 {right:50%;}.col-md-pull-5 {right:41.66666667%;}.col-md-pull-4 {right:33.33333333%;}.col-md-pull-3 {right:25%;}.col-md-pull-2 {right:16.66666667%;}.col-md-pull-1 {right:8.33333333%;}.col-md-pull-0 {right:auto;}.col-md-push-12 {left:100%;}.col-md-push-11 {left:91.66666667%;}.col-md-push-10 {left:83.33333333%;}.col-md-push-9 {left:75%;}.col-md-push-8 {left:66.66666667%;}.col-md-push-7 {left:58.33333333%;}.col-md-push-6 {left:50%;}.col-md-push-5 {left:41.66666667%;}.col-md-push-4 {left:33.33333333%;}.col-md-push-3 {left:25%;}.col-md-push-2 {left:16.66666667%;}.col-md-push-1 {left:8.33333333%;}.col-md-push-0 {left:auto;}.col-md-offset-12 {margin-left:100%;}.col-md-offset-11 {margin-left:91.66666667%;}.col-md-offset-10 {margin-left:83.33333333%;}.col-md-offset-9 {margin-left:75%;}.col-md-offset-8 {margin-left:66.66666667%;}.col-md-offset-7 {margin-left:58.33333333%;}.col-md-offset-6 {margin-left:50%;}.col-md-offset-5 {margin-left:41.66666667%;}.col-md-offset-4 {margin-left:33.33333333%;}.col-md-offset-3 {margin-left:25%;}.col-md-offset-2 {margin-left:16.66666667%;}.col-md-offset-1 {margin-left:8.33333333%;}.col-md-offset-0 {margin-left:0;}}@media (min-width:1200px) {.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {float:left;}.col-lg-12 {width:100%;}.col-lg-11 {width:91.66666667%;}.col-lg-10 {width:83.33333333%;}.col-lg-9 {width:75%;}.col-lg-8 {width:66.66666667%;}.col-lg-7 {width:58.33333333%;}.col-lg-6 {width:50%;}.col-lg-5 {width:41.66666667%;}.col-lg-4 {width:33.33333333%;}.col-lg-3 {width:25%;}.col-lg-2 {width:16.66666667%;}.col-lg-1 {width:8.33333333%;}.col-lg-pull-12 {right:100%;}.col-lg-pull-11 {right:91.66666667%;}.col-lg-pull-10 {right:83.33333333%;}.col-lg-pull-9 {right:75%;}.col-lg-pull-8 {right:66.66666667%;}.col-lg-pull-7 {right:58.33333333%;}.col-lg-pull-6 {right:50%;}.col-lg-pull-5 {right:41.66666667%;}.col-lg-pull-4 {right:33.33333333%;}.col-lg-pull-3 {right:25%;}.col-lg-pull-2 {right:16.66666667%;}.col-lg-pull-1 {right:8.33333333%;}.col-lg-pull-0 {right:auto;}.col-lg-push-12 {left:100%;}.col-lg-push-11 {left:91.66666667%;}.col-lg-push-10 {left:83.33333333%;}.col-lg-push-9 {left:75%;}.col-lg-push-8 {left:66.66666667%;}.col-lg-push-7 {left:58.33333333%;}.col-lg-push-6 {left:50%;}.col-lg-push-5 {left:41.66666667%;}.col-lg-push-4 {left:33.33333333%;}.col-lg-push-3 {left:25%;}.col-lg-push-2 {left:16.66666667%;}.col-lg-push-1 {left:8.33333333%;}.col-lg-push-0 {left:auto;}.col-lg-offset-12 {margin-left:100%;}.col-lg-offset-11 {margin-left:91.66666667%;}.col-lg-offset-10 {margin-left:83.33333333%;}.col-lg-offset-9 {margin-left:75%;}.col-lg-offset-8 {margin-left:66.66666667%;}.col-lg-offset-7 {margin-left:58.33333333%;}.col-lg-offset-6 {margin-left:50%;}.col-lg-offset-5 {margin-left:41.66666667%;}.col-lg-offset-4 {margin-left:33.33333333%;}.col-lg-offset-3 {margin-left:25%;}.col-lg-offset-2 {margin-left:16.66666667%;}.col-lg-offset-1 {margin-left:8.33333333%;}.col-lg-offset-0 {margin-left:0;}}.clearfix:before,.clearfix:after,.dl-horizontal dd:before,.dl-horizontal dd:after,.container:before,.container:after,.container-fluid:before,.container-fluid:after,.row:before,.row:after,.form-horizontal .form-group:before,.form-horizontal .form-group:after,.btn-toolbar:before,.btn-toolbar:after,.btn-group-vertical > .btn-group:before,.btn-group-vertical > .btn-group:after,.nav:before,.nav:after,.navbar:before,.navbar:after,.navbar-header:before,.navbar-header:after,.navbar-collapse:before,.navbar-collapse:after,.pager:before,.pager:after,.panel-body:before,.panel-body:after,.modal-header:before,.modal-header:after,.modal-footer:before,.modal-footer:after {display:table;content:" ";}.clearfix:after,.dl-horizontal dd:after,.container:after,.container-fluid:after,.row:after,.form-horizontal .form-group:after,.btn-toolbar:after,.btn-group-vertical > .btn-group:after,.nav:after,.navbar:after,.navbar-header:after,.navbar-collapse:after,.pager:after,.panel-body:after,.modal-header:after,.modal-footer:after {clear:both;}@media (max-width:767px) {.hidden-xs {display:none !important;}}@media (min-width:768px) and (max-width:991px) {.hidden-sm {display:none !important;}}.dropdown-menu {position:absolute;top:100%;left:0;z-index:1000;display:none;float:left;min-width:160px;padding:5px 0;margin:2px 0 0;font-size:14px;text-align:left;list-style:none;background-color:#fff;-webkit-background-clip:padding-box;background-clip:padding-box;border:1px solid #ccc;border:1px solid rgba(0, 0, 0, .15);border-radius:4px;-webkit-box-shadow:0 6px 12px rgba(0, 0, 0, .175);box-shadow:0 6px 12px rgba(0, 0, 0, .175);}@media (min-width:992px) and (max-width:1199px) {.hidden-md {display:none !important;}}@media (min-width:1200px) {.hidden-lg {display:none !important;}}.pull-right {float:right !important;}.pull-left {float:left !important;}.modal {position:fixed;top:0;right:0;bottom:0;left:0;z-index:1050;display:none;overflow:hidden;-webkit-overflow-scrolling:touch;outline:0;}@font-face {font-family:'Open Sans';font-style:normal;font-weight:400;src:local('Open Sans'), local('OpenSans'), url('https://d1jnx9ba8s6j9r.cloudfront.net/css/fonts/opensans3.woff') format('woff');font-display:swap;}@font-face {font-family:'Open Sans';font-style:normal;font-weight:700;src:local('Ospen Sans Semibold'), local('OpenSans-Semibold'), url('https://d1jnx9ba8s6j9r.cloudfront.net/css/fonts/opensans5.woff') format('woff');font-display:swap;}@font-face {font-family:'Open Sans';font-style:normal;font-weight:900;src:local('Open Sans Bold'), local('OpenSans-Bold'), url("https://d1jnx9ba8s6j9r.cloudfront.net/css/fonts/opensans7.woff") format('woff');font-display:swap;}@font-face {font-family:"icomoon";src:url("https://d1jnx9ba8s6j9r.cloudfront.net/fonts/home_ico_new_12_5_20.woff") format("woff");font-weight:normal;font-style:normal;font-display:swap;}[class^="icon-"], [class*=" icon-"] {font-family:'icomoon' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}.icon-fa-circle-o-notch:before {content:"\e900";}.icon-Arrow-leftward2:before {content:"\e901";}.icon-Arrow-rightward2:before {content:"\e902";}.icon-done_ico2:before {content:"\e903";}.icon-cross:before {content:"\e904";}.icon-edureka-refer-icon:before {content:"\e905";}.icon-empty-star_ico:before {content:"\e906";}.icon-fa-bell:before {content:"\e907";}.icon-fa-youtube:before {content:"\e908";}.icon-fa-linkedin:before {content:"\e909";}.icon-fa-twitter:before {content:"\e90a";}.icon-filled_star_ico:before {content:"\e90b";}.icon-half-star_ico:before {content:"\e90c";}.icon-logo:before {content:"\e90d";}.icon-Home-page-humburger-menu-01:before {content:"\e90e";}.icon-Home-page-search:before {content:"\e90f";}.slick-list,.slick-slider,.slick-track{position:relative;display:block}.slick-loading .slick-slide,.slick-loading .slick-track{visibility:hidden}.slick-slider{box-sizing:border-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-khtml-user-select:none;-ms-touch-action:pan-y;touch-action:pan-y;-webkit-tap-highlight-color:transparent}.slick-list{overflow:hidden;margin:0;padding:0}.slick-list:focus{outline:0}.slick-list.dragging{cursor:pointer;cursor:hand}.slick-slider .slick-list,.slick-slider .slick-track{-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}.slick-track{top:0;left:0;margin-left:auto;margin-right:auto}.slick-track:after,.slick-track:before{display:table;content:''}.slick-track:after{clear:both}.slick-slide{display:none;float:left;height:100%;min-height:1px}[dir=rtl] .slick-slide{float:right}.slick-slide img{display:block}.slick-slide.slick-loading img{display:none}.slick-slide.dragging img{pointer-events:none}.slick-initialized .slick-slide{display:block}.slick-vertical .slick-slide{display:block;height:auto;border:1px solid transparent}.slick-arrow.slick-hidden{display:none}@font-face {font-family:'icomoon';src:url('https://d1jnx9ba8s6j9r.cloudfront.net/fonts/icomoon_20210212.woff') format('woff');font-weight:normal;font-style:normal;font-display:block;}[class^="courseicon_"], [class*=" courseicon_"] {font-family:'icomoon' !important;speak:none;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}.courseicon_Course-Icon-1:before {content:"\e1001";}.courseicon_Course-Icon-2:before {content:"\e1002";}.courseicon_Course-Icon-4:before {content:"\e1004";}.courseicon_Course-Icon-6:before {content:"\e1006";}.courseicon_Course-Icon-10:before {content:"\e1010";}.courseicon_Course-Icon-13:before {content:"\e1013";}.courseicon_Course-Icon-16:before {content:"\e1016";}.courseicon_Course-Icon-20:before {content:"\e1020";}.courseicon_Course-Icon-22:before {content:"\e1022";}.courseicon_Course-Icon-26:before {content:"\e1026";}.courseicon_Course-Icon-28:before {content:"\e1028";}.courseicon_Course-Icon-30:before {content:"\e1030";}.courseicon_Course-Icon-33:before {content:"\e1033";}.courseicon_Course-Icon-38:before {content:"\e1038";}.courseicon_Course-Icon-39:before {content:"\e1039";}.courseicon_Course-Icon-40:before {content:"\e1040";}.courseicon_Course-Icon-43:before {content:"\e1043";}.courseicon_Course-Icon-44:before {content:"\e1044";}.courseicon_Course-Icon-45:before {content:"\e1045";}.courseicon_Course-Icon-47:before {content:"\e1047";}.courseicon_Course-Icon-49:before {content:"\e1049";}.courseicon_Course-Icon-51:before {content:"\e1051";}.courseicon_Course-Icon-54:before {content:"\e1054";}.courseicon_Course-Icon-58:before {content:"\e1058";}.courseicon_Course-Icon-59:before {content:"\e1059";}.courseicon_Course-Icon-60:before {content:"\e1060";}.courseicon_Course-Icon-62:before {content:"\e1062";}.courseicon_Course-Icon-63:before {content:"\e1063";}.courseicon_Course-Icon-64:before {content:"\e1064";}.courseicon_Course-Icon-65:before {content:"\e1065";}.courseicon_Course-Icon-66:before {content:"\e1066";}.courseicon_Course-Icon-67:before {content:"\e1067";}.courseicon_Course-Icon-68:before {content:"\e1068";}.courseicon_Course-Icon-70:before {content:"\e1070";}.courseicon_Course-Icon-71:before {content:"\e1071";}.courseicon_Course-Icon-72:before {content:"\e1072";}.courseicon_Course-Icon-73:before {content:"\e1073";}.courseicon_Course-Icon-74:before {content:"\e1074";}.courseicon_Course-Icon-75:before {content:"\e1075";}.courseicon_Course-Icon-76:before {content:"\e1076";}.courseicon_Course-Icon-77:before {content:"\e1077";}.courseicon_Course-Icon-78:before {content:"\e1078";}.courseicon_Course-Icon-86:before {content:"\e1086";}.courseicon_Course-Icon-94:before {content:"\e1094";}.courseicon_Course-Icon-96:before {content:"\e1096";}.courseicon_Course-Icon-97:before {content:"\e1097";}.courseicon_Course-Icon-98:before {content:"\e1098";}.courseicon_Course-Icon-101:before {content:"\e1101";}.courseicon_Course-Icon-103:before {content:"\e1103";}.courseicon_Course-Icon-104:before {content:"\e1104";}.courseicon_Course-Icon-105:before {content:"\e1105";}.courseicon_Course-Icon-106:before {content:"\e1106";}.courseicon_Course-Icon-108:before {content:"\e1108";}.courseicon_Course-Icon-111:before {content:"\e1111";}.courseicon_Course-Icon-112:before {content:"\e1112";}.courseicon_Course-Icon-113:before {content:"\e1113";}.courseicon_Course-Icon-117:before {content:"\e1117";}.courseicon_Course-Icon-118:before {content:"\e1118";}.courseicon_Course-Icon-119:before {content:"\e1119";}.courseicon_Course-Icon-120:before {content:"\e1120";}.courseicon_Course-Icon-121:before {content:"\e1121";}.courseicon_Course-Icon-122:before {content:"\e1122";}.courseicon_Course-Icon-123:before {content:"\e1123";}.courseicon_Course-Icon-124:before {content:"\e1124";}.courseicon_Course-Icon-126:before {content:"\e1126";}.courseicon_Course-Icon-127:before {content:"\e1127";}.courseicon_Course-Icon-128:before {content:"\e1128";}.courseicon_Course-Icon-129:before {content:"\e1129";}.courseicon_Course-Icon-130:before {content:"\e1130";}.courseicon_Course-Icon-131:before {content:"\e1131";}.courseicon_Course-Icon-132:before {content:"\e1132";}.courseicon_Course-Icon-133:before {content:"\e1133";}.courseicon_Course-Icon-134:before {content:"\e1134";}.courseicon_Course-Icon-138:before {content:"\e1138";}.courseicon_Course-Icon-142:before {content:"\e1142";}.courseicon_Course-Icon-143:before {content:"\e1143";}.courseicon_Course-Icon-144:before {content:"\e1144";}.courseicon_Course-Icon-145:before {content:"\e1145";}.courseicon_Course-Icon-146:before {content:"\e1146";}.courseicon_Course-Icon-147:before {content:"\e1147";}.courseicon_Course-Icon-148:before {content:"\e1148";}.courseicon_Course-Icon-149:before {content:"\e1149";}.courseicon_Course-Icon-150:before {content:"\e1150";}.courseicon_Course-Icon-151:before {content:"\e1151";}.courseicon_Course-Icon-152:before {content:"\e1152";}.courseicon_Course-Icon-153:before {content:"\e1153";}.courseicon_Course-Icon-154:before {content:"\e1154";}.courseicon_Course-Icon-155:before {content:"\e1155";}.courseicon_Course-Icon-156:before {content:"\e1156";}.courseicon_Course-Icon-157:before {content:"\e1157";}.courseicon_Course-Icon-158:before {content:"\e1158";}.courseicon_Course-Icon-160:before {content:"\e1160";}.courseicon_Course-Icon-161:before {content:"\e1161";}.courseicon_Course-Icon-162:before {content:"\e1162";}.courseicon_Course-Icon-163:before {content:"\e1163";}.courseicon_Course-Icon-164:before {content:"\e1164";}.courseicon_Course-Icon-165:before {content:"\e1165";}.courseicon_Course-Icon-169:before {content:"\e1169";}.courseicon_Course-Icon-170:before {content:"\e1170";}.courseicon_Course-Icon-171:before {content:"\e1171";}.courseicon_Course-Icon-173:before {content:"\e1173";}.courseicon_Course-Icon-174:before {content:"\e1174";}.courseicon_Course-Icon-175:before {content:"\e1175";}.courseicon_Course-Icon-177:before {content:"\e1177";}.courseicon_Course-Icon-178:before {content:"\e1178";}.courseicon_Course-Icon-179:before {content:"\e1179";}.courseicon_Course-Icon-189:before {content:"\e1189";}.courseicon_Course-Icon-233:before {content:"\e1233";}.courseicon_Course-Icon-234:before {content:"\e1234";}.courseicon_Course-Icon-235:before {content:"\e1235";}.courseicon_Course-Icon-236:before {content:"\e1236";}.courseicon_Course-Icon-237:before {content:"\e1237";}.courseicon_Course-Icon-238:before {content:"\e1238";}.courseicon_Course-Icon-239:before {content:"\e1239";}.courseicon_Course-Icon-241:before {content:"\e1241";}.courseicon_Course-Icon-242:before {content:"\e1242";}.courseicon_Course-Icon-243:before {content:"\e1243";}.courseicon_Course-Icon-244:before {content:"\e1244";}.courseicon_Course-Icon-245:before {content:"\e1245";}.courseicon_Course-Icon-246:before {content:"\e1246";}.courseicon_Course-Icon-247:before {content:"\e1247";}.courseicon_Course-Icon-248:before {content:"\e1248";}.courseicon_Course-Icon-250:before {content:"\e1250";}.courseicon_Course-Icon-255:before {content:"\e1255";}.courseicon_Course-Icon-259:before {content:"\e1259";}.courseicon_Course-Icon-260:before {content:"\e1260";}.courseicon_Course-Icon-265:before {content:"\e1265";}.courseicon_Course-Icon-267:before {content:"\e1267";}.courseicon_Course-Icon-268:before {content:"\e1268";}.courseicon_Course-Icon-270:before {content:"\e1270";}.courseicon_Course-Icon-271:before {content:"\e1271";}.courseicon_Course-Icon-273:before {content:"\e1273";}.courseicon_Course-Icon-274:before {content:"\e1274";}.courseicon_Course-Icon-275:before {content:"\e1275";}.courseicon_Course-Icon-277:before {content:"\e1277";}.courseicon_Course-Icon-281:before {content:"\e1281";}.courseicon_Course-Icon-282:before {content:"\e1282";}.courseicon_Course-Icon-285:before {content:"\e1285";}.courseicon_Course-Icon-287:before {content:"\e1287";}.courseicon_Course-Icon-292:before {content:"\e1292";}.courseicon_Course-Icon-293:before {content:"\e1293";}.courseicon_Course-Icon-294:before {content:"\e1294";}.courseicon_Course-Icon-295:before {content:"\e1295";}.courseicon_Course-Icon-296:before {content:"\e1296";}.courseicon_Course-Icon-297:before {content:"\e1297";}.courseicon_Course-Icon-299:before {content:"\e1299";}.courseicon_Course-Icon-300:before {content:"\e1300";}.courseicon_Course-Icon-301:before {content:"\e1301";}.courseicon_Course-Icon-308:before {content:"\e1308";}.courseicon_Course-Icon-309:before {content:"\e1309";}.courseicon_Course-Icon-310:before {content:"\e1310";}.courseicon_Course-Icon-314:before {content:"\e1314";}.courseicon_Course-Icon-319:before {content:"\e1319";}.courseicon_Course-Icon-320:before {content:"\e1320";}.courseicon_Course-Icon-324:before {content:"\e1324";}.courseicon_Course-Icon-325:before {content:"\e1325";}.courseicon_Course-Icon-326:before {content:"\e1326";}.courseicon_Course-Icon-327:before {content:"\e1327";}.courseicon_Course-Icon-330:before {content:"\e1330";}.courseicon_Course-Icon-331:before {content:"\e1331";}.courseicon_Course-Icon-332:before {content:"\e1332";}.courseicon_Course-Icon-342:before {content:"\e1342";}.courseicon_Course-Icon-343:before {content:"\e1343";}.courseicon_Course-Icon-344:before {content:"\e1344";}.courseicon_Course-Icon-357:before {content:"\e1357";}.courseicon_Course-Icon-402:before {content:"\e1402";}.courseicon_Course-Icon-440:before {content:"\e1440";}.courseicon_Course-Icon-446:before {content:"\e1446";}.courseicon_Course-Icon-447:before {content:"\e1447";}.courseicon_Course-Icon-448:before {content:"\e1448";}.courseicon_Course-Icon-449:before {content:"\e1449";}.courseicon_Course-Icon-450:before {content:"\e1450";}.courseicon_Course-Icon-451:before {content:"\e1451";}.courseicon_Course-Icon-452:before {content:"\e1452";}.courseicon_Course-Icon-455:before {content:"\e1455";}.courseicon_Course-Icon-456:before {content:"\e1456";}.courseicon_Course-Icon-457:before {content:"\e1457";}.courseicon_Course-Icon-462:before {content:"\e1462";}.courseicon_Course-Icon-463:before {content:"\e1463";}.courseicon_Course-Icon-467:before {content:"\e1467";}.courseicon_Course-Icon-468:before {content:"\e1468";}.courseicon_Course-Icon-469:before {content:"\e1469";}.courseicon_Course-Icon-470:before {content:"\e1470";}.courseicon_Course-Icon-473:before {content:"\e1473";}.courseicon_Course-Icon-474:before {content:"\e1474";}.courseicon_Course-Icon-478:before {content:"\e1478";}.courseicon_Course-Icon-479:before {content:"\e1479";}.courseicon_Course-Icon-481:before {content:"\e1481";}.courseicon_Course-Icon-482:before {content:"\e1482";}.courseicon_Course-Icon-484:before {content:"\e1484";}.courseicon_Course-Icon-488:before {content:"\e1488";}.courseicon_Course-Icon-489:before {content:"\e1489";}.courseicon_Course-Icon-491:before {content:"\e1491";}.courseicon_Course-Icon-493:before {content:"\e1493";}.courseicon_Course-Icon-499:before {content:"\e1499";}.courseicon_Course-Icon-500:before {content:"\e1500";}.courseicon_Course-Icon-502:before {content:"\e1502";}.courseicon_Course-Icon-504:before {content:"\e1504";}.courseicon_Course-Icon-505:before {content:"\e1505";}.courseicon_Course-Icon-507:before {content:"\e1507";}.courseicon_Course-Icon-521:before {content:"\e1521";}.courseicon_Course-Icon-525:before {content:"\e1525";}.courseicon_Course-Icon-526:before {content:"\e1526";}.courseicon_Course-Icon-528:before {content:"\e1528";}.courseicon_Course-Icon-539:before {content:"\e1539";}.courseicon_Course-Icon-542:before {content:"\e1542";}.courseicon_Course-Icon-546:before {content:"\e1546";}.courseicon_Course-Icon-547:before {content:"\e1547";}.courseicon_Course-Icon-552:before {content:"\e1552";}.courseicon_Course-Icon-553:before {content:"\e1553";}.courseicon_Course-Icon-554:before {content:"\e1554";}.courseicon_Course-Icon-555:before {content:"\e1555";}.courseicon_Course-Icon-558:before {content:"\e1558";}.courseicon_Course-Icon-559:before {content:"\e1559";}.courseicon_Course-Icon-562:before {content:"\e1562";}.courseicon_Course-Icon-563:before {content:"\e1563";}.courseicon_Course-Icon-564:before {content:"\e1564";}.courseicon_Course-Icon-572:before {content:"\e1572";}.courseicon_Course-Icon-573:before {content:"\e1573";}.courseicon_Course-Icon-575:before {content:"\e1575";}.courseicon_Course-Icon-576:before {content:"\e1576";}.courseicon_Course-Icon-579:before {content:"\e1579";}.courseicon_Course-Icon-582:before {content:"\e1582";}.courseicon_Course-Icon-586:before {content:"\e1586";}.courseicon_Course-Icon-587:before {content:"\e1587";}.courseicon_Course-Icon-589:before {content:"\e1589";}.courseicon_Course-Icon-604:before {content:"\e1604";}.courseicon_Course-Icon-608:before {content:"\e1608";}.courseicon_Course-Icon-610:before {content:"\e1610";}.courseicon_Course-Icon-612:before {content:"\e1612";}.courseicon_Course-Icon-627:before {content:"\e1627";}.courseicon_Course-Icon-633:before {content:"\e1633";}.courseicon_Course-Icon-651:before {content:"\e1651";}.courseicon_Course-Icon-652:before {content:"\e1652";}.courseicon_Course-Icon-665:before {content:"\e1665";}.courseicon_Course-Icon-666:before {content:"\e1666";}.courseicon_Course-Icon-671:before {content:"\e1671";}.courseicon_Course-Icon-672:before {content:"\e1672";}.courseicon_Course-Icon-675:before {content:"\e1675";}.courseicon_Course-Icon-676:before {content:"\e1676";}.courseicon_Course-Icon-677:before {content:"\e1677";}.courseicon_Course-Icon-680:before {content:"\e1680";}.courseicon_Course-Icon-681:before {content:"\e1681";}.courseicon_Course-Icon-683:before {content:"\e1683";}.courseicon_Course-Icon-687:before {content:"\e1687";}.courseicon_Course-Icon-689:before {content:"\e1689";}.courseicon_Course-Icon-698:before {content:"\e1698";}.courseicon_Course-Icon-703:before {content:"\e1703";}.courseicon_Course-Icon-705:before {content:"\e1705";}.courseicon_Course-Icon-706:before {content:"\e1706";}.courseicon_Course-Icon-769:before {content:"\e1769";}.courseicon_Course-Icon-778:before {content:"\e1778";}.courseicon_Course-Icon-779:before {content:"\e1779";}.courseicon_Course-Icon-780:before {content:"\e1780";}.courseicon_Course-Icon-781:before {content:"\e1781";}.courseicon_Course-Icon-782:before {content:"\e1782";}.courseicon_Course-Icon-787:before {content:"\e1787";}.courseicon_Course-Icon-788:before {content:"\e1788";}.courseicon_Course-Icon-789:before {content:"\e1789";}.courseicon_Course-Icon-791:before {content:"\e1791";}.courseicon_Course-Icon-793:before {content:"\e1793";}.courseicon_Course-Icon-794:before {content:"\e1794";}.courseicon_Course-Icon-795:before {content:"\e1795";}.courseicon_Course-Icon-796:before {content:"\e1796";}.courseicon_Course-Icon-797:before {content:"\e1797";}.courseicon_Course-Icon-803:before {content:"\e1803";}.courseicon_Course-Icon-805:before {content:"\e1805";}.courseicon_Course-Icon-806:before {content:"\e1806";}.courseicon_Course-Icon-807:before {content:"\e1807";}.courseicon_Course-Icon-811:before {content:"\e1811";}.courseicon_Course-Icon-813:before {content:"\e1813";}.courseicon_Course-Icon-814:before, .courseicon_Course-Icon-1073:before, .courseicon_Course-Icon-1067:before, .courseicon_Course-Icon-1062:before{content:"\e1814";}.courseicon_Course-Icon-815:before {content:"\e1815";}.courseicon_Course-Icon-816:before {content:"\e1816";}.courseicon_Course-Icon-817:before {content:"\e1817";}.courseicon_Course-Icon-818:before {content:"\e1818";}.courseicon_Course-Icon-824:before {content:"\e1824";}.courseicon_Course-Icon-825:before {content:"\e1825";}.courseicon_Course-Icon-826:before {content:"\e1826";}.courseicon_Course-Icon-827:before {content:"\e1827";}.courseicon_Course-Icon-828:before {content:"\e1828";}.courseicon_Course-Icon-829:before {content:"\e1829";}.courseicon_Course-Icon-830:before {content:"\e1830";}.courseicon_Course-Icon-831:before {content:"\e1831";}.courseicon_Course-Icon-832:before {content:"\e1832";}.courseicon_Course-Icon-833:before {content:"\e1833";}.courseicon_Course-Icon-834:before {content:"\e1834";}.courseicon_Course-Icon-835:before {content:"\e1835";}.courseicon_Course-Icon-836:before {content:"\e1836";}.courseicon_Course-Icon-837:before {content:"\e1837";}.courseicon_Course-Icon-838:before {content:"\e1838";}.courseicon_Course-Icon-839:before {content:"\e1839";}.courseicon_Course-Icon-840:before {content:"\e1840";}.courseicon_Course-Icon-841:before {content:"\e1841";}.courseicon_Course-Icon-843:before {content:"\e1843";}.courseicon_Course-Icon-845:before {content:"\e1845";}.courseicon_Course-Icon-846:before {content:"\e1846";}.courseicon_Course-Icon-847:before {content:"\e1847";}.courseicon_Course-Icon-848:before {content:"\e1848";}.courseicon_Course-Icon-849:before {content:"\e1849";}.courseicon_Course-Icon-850:before {content:"\e1850";}.courseicon_Course-Icon-851:before {content:"\e1851";}.courseicon_Course-Icon-852:before {content:"\e1852";}.courseicon_Course-Icon-853:before {content:"\e1853";}.courseicon_Course-Icon-854:before {content:"\e1854";}.courseicon_Course-Icon-858:before {content:"\e1858";}.courseicon_Course-Icon-861:before {content:"\e1861";}.courseicon_Course-Icon-862:before {content:"\e1862";}.courseicon_Course-Icon-863:before {content:"\e1863";}.courseicon_Course-Icon-864:before {content:"\e1864";}.courseicon_Course-Icon-865:before {content:"\e1865";}.courseicon_Course-Icon-866:before {content:"\e1866";}.courseicon_Course-Icon-867:before {content:"\e1867";}.courseicon_Course-Icon-868:before {content:"\e1868";}.courseicon_Course-Icon-869:before {content:"\e1869";}.courseicon_Course-Icon-878:before {content:"\e1878";}.courseicon_Course-Icon-879:before {content:"\e1879";}.courseicon_Course-Icon-883:before {content:"\e1883";}.courseicon_Course-Icon-886:before {content:"\e1886";}.courseicon_Course-Icon-887:before {content:"\e1887";}.courseicon_Course-Icon-888:before {content:"\e1888";}.courseicon_Course-Icon-889:before {content:"\e1889";}.courseicon_Course-Icon-905:before {content:"\e1905";}.courseicon_Course-Icon-914:before {content:"\e1914";}.courseicon_Course-Icon-934:before {content:"\e1934";}.courseicon_Course-Icon-935:before {content:"\e1935";}.courseicon_Course-Icon-1136:before {content:"\e1928";}.courseicon_Course-Icon-1162:before {content:"\e1939";}.courseicon_Course-Icon-1172:before {content:"\e1938";}.courseicon_Course-Icon-1202:before {content:"\e1918";}.courseicon_Course-Icon-1217:before {content:"\e1937";}.courseicon_Course-Icon-1281:before {content:"\e1944";}.courseicon_Course-Icon-1308:before {content:"\e1945";}.courseicon_Default-Course-icon__Default-Course-icon:before {content:"\e5000";}body {font-family:'Open Sans', sans-serif;background:#F9F9F9;}.no-padding {padding:0 !important;}*,a {text-decoration:none !important;outline:none;}.light_blue_back {background-color:#eff4ff;}.header_edureka .navbar {height:60px;box-shadow:0 2px 10px 0 rgba(0,0,0,0.2);background-image:linear-gradient(to left,#248de4,#0c5397);padding:13px 40px;}.header_edureka .navbar .navbar-headerw {min-width:136px;display:inline-block;}.header_edureka .navbar .navbar-headerw a i {color:#fff;font-size:20px;}.header_edureka .navbar .search_header {display:inline-block;position:relative;width:calc(100% - 730px);max-width:630px;}.header_edureka .navbar .search_header input {height:35px;border-radius:2px;background:#ffffff;font-size:14px;font-weight:400;color:#4a4a4a;padding:7px 70px 7px 15px;width:100%;box-shadow:none;border:none;position:relative;}.header_edureka .navbar .search_header input::placeholder {font-size:14px;}.header_edureka .navbar .search_header::after {content:"\e915";color:#ffffff;font-family:'icomoon';position:absolute;right:0;font-size:14px;background:linear-gradient(126deg,#f5a623,#f76b1c);width:70px;height:35px;text-align:center;cursor:pointer;padding-top:7px;border-radius:2px;}.header_edureka .navbar .nav {padding-top:0px;}.header_edureka .navbar .nav li a {color:#ffffff;background:transparent;font-size:14px;padding:7px 15px;display:inline-block;}.header_edureka .navbar .nav li a:hover {background:transparent;}.header_edureka .navbar .nav li .login_click {border-left:1px solid #ffffff;margin-left:10px;padding-left:25px;font-weight:bold;opacity:0.9;}.header_edureka .navbar .nav li .signup_click {background:rgba(255,255,255,0.2);border-radius:2px;opacity:0.9;font-weight:bold;}.header_edureka .navbar .nav li .signup_click:hover {background:rgba(255,255,255,0.2);}.header_edureka .navbar .nav li .viewofferresp {opacity:0.98;border-radius:2px;display:none;width:auto;font-size:14px;font-weight:700;color:#0c5397;border:medium none;padding:3px 8px !important;margin:-3px 0 0 0;float:right;background:#ffffff !important;border-left:medium none;cursor:pointer;}#ajax-loader {background-color:rgba(255,255,255,0.8);display:none;height:100%;left:0;position:fixed;text-align:center;top:0;width:100%;z-index:99999;}#ajax-loader img {left:50%;position:fixed;top:50%;}li.walleticonheader a {padding:2px 0px 0px 0 !important;}li.walleticonheader a i.icon-edureka-refer-icon {color:#ffffff;display:inline-block;font-size:28px;margin-right:6px;vertical-align:middle;position:relative;}li.walleticonheader a span.referamt {border-bottom:1px solid #ffffff;border-radius:4px;border-right:1px solid #ffffff;border-top:1px solid #ffffff;color:#ffffff;display:inline-block;font-size:16px;margin-right:4px;padding:3px 7px 3px 0;vertical-align:middle;}li.walleticonheader .refer-edu-cash {background:linear-gradient(to right,#f1f1f1,#f4f4f4);box-shadow:0 2px 4px 0 rgba(0,0,0,0.2);display:none;padding:10px;position:absolute;width:170px;min-height:92px;height:auto;align-items:center;}li.walleticonheader .refer-edu-cash .loader-refer {background:linear-gradient(to right,#f1f1f1,#f4f4f4);box-shadow:0 2px 4px 0 rgba(0,0,0,0.2);height:100%;left:0;line-height:0;margin:0 auto;position:absolute;right:0;text-align:center;top:0;width:100%;display:none;}li.walleticonheader .refer-edu-cash .loader-refer img {padding-top:25px;width:40px;}.dropdown.notifydrop a {padding:9px 16px 0px 0 !important;}.dropdown.notifydrop a .notificationcount {background:#d93b3b;padding:0 5px;top:0;left:6px;font-size:11px;position:absolute;align-items:center;line-height:16px;border-radius:10px;color:#fff;}.dropdown.notifydrop .dropdown-menu {margin-top:18px;border:medium none;border-radius:0px;padding:0;max-height:400px;min-height:38px;width:400px;box-shadow:0 2px 4px 0 rgba(0,0,0,0.2);background:linear-gradient(to right,#f1f1f1,#f4f4f4);}.dropdown.notifydrop .dropdown-menu::before {border-color:transparent transparent #f4f4f4;border-style:solid;border-width:0 6px 6px;content:" ";display:block;height:0;position:absolute;right:16px;top:-6px;width:0;}.dropdown.notifydrop .dropdown-menu li {overflow:hidden;border-radius:0px;font-size:14px;font-weight:600;padding:10px;line-height:15px;color:#000000;opacity:0.75;border-bottom:#e0e0e0 1px solid;}.dropdown.notifydrop .dropdown-menu li a {color:#000000;font-size:13px;font-weight:400;opacity:0.75;cursor:pointer;width:100%;padding:0 !important;}.dropdown.notifydrop .dropdown-menu li a.showmorecs {color:#337ab7;}.dropdown.userdrop a {padding:0 !important;}.dropdown.userdrop a .webinar-profile-name {display:inline-block;overflow:hidden;text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;max-width:60px;min-width:10px;color:#ffffff;font-weight:bold;}.dropdown.userdrop a .user_image {width:34px;height:34px;border-radius:50%;max-width:none;display:inline-block;overflow:hidden;vertical-align:middle;margin-left:5px;background:#dddddd;}.dropdown.userdrop a .user_image img {width:100%;}.dropdown.userdrop .user-menu {background:#f4f4f4;border:medium;padding:0;box-shadow:0 2px 4px 0 rgba(0,0,0,0.2);margin-top:13px;}.dropdown.userdrop .user-menu::before {border-color:transparent transparent #f4f4f4;z-index:2;border-style:solid;border-width:0 6px 6px;content:" ";display:block;height:0;position:absolute;right:11px;top:-6px;width:0;}.dropdown.userdrop .user-menu li {overflow:hidden;width:100%;}.dropdown.userdrop .user-menu li a {padding:5px 15px !important;font-size:13px;font-weight:600;line-height:normal;color:#000000;opacity:0.75;text-transform:capitalize;border-bottom:medium none;display:block;}.dropdown.userdrop .user-menu li a:hover {background-image:linear-gradient(96deg,#248de4,#243be4);color:#ffffff;}.Community_drop .dropdown a i {font-size:10px;margin-left:3px;}.Community_drop .dropdown .dropdown-menu {background:#f4f4f4;border:medium;padding:0;box-shadow:0 2px 4px 0 rgba(0,0,0,0.2);margin-top:13px;}.Community_drop .dropdown .dropdown-menu::before {border-color:transparent transparent #f4f4f4;z-index:2;border-style:solid;border-width:0 6px 6px;content:" ";display:block;height:0;position:absolute;right:19px;top:-6px;width:0;}.Community_drop .dropdown .dropdown-menu li {overflow:hidden;}.Community_drop .dropdown .dropdown-menu li a {padding:5px 15px !important;font-size:13px;font-weight:500;line-height:normal;color:#000000;opacity:0.75;text-transform:capitalize;border-bottom:medium none;display:block;}.Community_drop .dropdown .dropdown-menu li a:hover {background-image:linear-gradient(96deg,#248de4,#243be4);color:#ffffff;}.offerBanner {left:0;min-height:0;position:fixed;top:0;width:100%;}.header_edureka.withoffer nav {top:33px;}@media only screen and (min-width:300px) and (max-width:767px) {.mobile_home_head {display:inline-block !important;float:left;}.mobile_home_head a {font-size:16px;color:#ffffff;padding:0px 15px !important;}.mobile_offer_open {float:left;}body {margin:0 !important;}.header_edureka.withoffer nav {top:0px;}.offerBanner {position:relative;}.header_edureka.mobile_screen.mobile_scroll {min-height:62px;}.header_edureka.mobile_screen.mobile_scroll .navbar {position:fixed;}.header_edureka.mobile_screen.mobile_scroll .navbar-headerw {display:none;}.header_edureka.mobile_screen.mobile_scroll .after_login_menu {display:none;}.header_edureka.mobile_screen.mobile_scroll .search_header {position:static;width:calc(100% - 35px);padding:0;background:transparent;}.header_edureka.mobile_screen.mobile_scroll .before_login_head {display:none !important;}.header_edureka .navbar {padding:13px 15px;position:relative;height:auto;margin:0;}.header_edureka .navbar .nav {margin:0;}.header_edureka .navbar .navbar-headerw a i {font-size:18px;}.header_edureka .navbar .new_head_ham {display:inline-block;width:auto;color:#ffffff;font-size:16px;margin-right:15px;}.header_edureka .navbar .search_header {position:absolute;left:0;top:50px;width:100%;padding:0px 15px 10px;max-width:100%;background:linear-gradient(to left,#248de4,#0c5397);}.header_edureka .navbar .search_header::after {right:15px;}.header_edureka .navbar .search_header input {padding:7px 47px 7px 15px;}.header_edureka .navbar .search_header::after {width:40px;}.header_edureka .navbar .after_login_menu .home-login {margin:0;}.header_edureka .navbar .after_login_menu .home-login li {display:inline-block;}.header_edureka .navbar .after_login_menu .home-login .dropdown.notifydrop a {padding:0px 8px 0px 0 !important;}.header_edureka .navbar .after_login_menu .home-login .dropdown.notifydrop .dropdown-menu {position:absolute;right:-97px;width:294px;}.header_edureka .navbar .after_login_menu .home-login .dropdown.notifydrop .dropdown-menu::before {right:105px;}.header_edureka .navbar .after_login_menu .home-login .dropdown.userdrop a .user_image {width:24px;height:24px;}.header_edureka .navbar .after_login_menu .home-login .dropdown.userdrop .user-menu {position:absolute;}}@media only screen and (min-width:768px) and (max-width:991px) {body {margin:0 !important;}.header_edureka.withoffer nav {top:0px;}.offerBanner {position:relative;}.header_edureka .navbar {position:relative;margin:0;padding:13px 15px;}.header_edureka .navbar .search_header {width:calc(100% - 419px);max-width:419px;}.afterclose_open {position:fixed;}}.center_open_pop {position:absolute;top:50% !important;transform:translate(0,-50%) !important;-ms-transform:translate(0,-50%) !important;-webkit-transform:translate(0,-50%) !important;margin:0 auto !important;min-height:10%;left:0;right:0;}.center_pop_video {background:rgba(0,0,0,0.5);}.center_pop_video .modal-dialog {width:512px;}.center_pop_video .modal-dialog .modal-content .modal-header {text-align:left;padding:30px;border:0;box-shadow:0 0 5px 0 rgba(0,0,0,0.2);}.center_pop_video .modal-dialog .modal-content .modal-header button {font-size:40px;font-weight:lighter;line-height:20px;}.center_pop_video .modal-dialog .modal-content .modal-header img {margin-right:15px;}.center_pop_video .modal-dialog .modal-content .modal-header h4 {display:inline-block;vertical-align:middle;margin:0;font-size:20px;line-height:1.05;color:#525f78;font-weight:600;}.center_pop_video .modal-dialog .modal-content .modal-body {padding:40px;}.response_error {color:#f00;}#enrollModalcenter .europe_term p {text-align:left !important;font-size:14px !important;font-weight:normal;font-style:normal;font-stretch:normal;letter-spacing:normal;color:#5c5d5d !important;margin-bottom:16px !important;margin-top:0 !important;}.login_video_success {display:inline-block;width:100%;margin-bottom:15px;color:#1ead77;text-align:center;}.login_video_success span {font-size:15px;position:relative;font-weight:400;display:inline-block;}.login_video_success i {margin-right:5px;}.login_video_frm form .inputfld {margin-bottom:30px;position:relative;}.login_video_frm form .inputfld input {width:100%;text-align:left;height:57px;border-radius:5px;box-shadow:inset 0 0 3px 0 rgba(0,0,0,0.2);background-color:#ffffff;border:solid 1px #cbd6e2;line-height:1.31;color:#444444;padding:15px;}.login_video_frm form .inputfld input:focus {background-color:#f9fcfd;border:solid 1px #2ea2f8;}.login_video_frm form .inputfld input::placeholder {font-size:16px !important;color:#444444 !important;opacity:0.5 !important;}.login_video_frm form .inputfld .country_mob_prefix {position:absolute;top:27px;z-index:1;left:2px;}.login_video_frm form .inputfld input.mobile_country_code {padding-left:120px;}.login_video_frm form .inputfld label {width:100%;text-align:left;font-size:16px;line-height:1.31;letter-spacing:normal;color:#444444;font-weight:500;}.login_video_frm form .inputfld label span.chng {font-size:12px;color:#0575b3;cursor:pointer;}.login_video_frm form .inputfld label.email_mob_change {font-weight:bold;}.login_video_frm form .inputfld span.float_lnk {position:absolute;right:0;bottom:0;align-items:center;padding:17px 15px;color:#0575b3;font-size:16px;cursor:pointer;}.login_video_frm form .inputfld.pre_ftch_data .em_ftch {font-size:14px;color:#444444;border-right:1px solid #444444;padding-right:8px;margin-right:10px;}.login_video_frm form .inputfld.pre_ftch_data .num_ftch {font-size:14px;color:#444444;display:inline-block;}.login_video_frm form .errormsg_vd {text-align:left;margin:0;position:absolute;bottom:-20px;font-size:12px;color:#cc2029;display:block;}.login_video_frm form button {height:57px;border-radius:5px;background-color:#f7951e;font-size:20px;font-weight:bold;line-height:1.05;color:#ffffff;border:0;box-shadow:none;margin:35px 0 0px;cursor:pointer;padding:0;}.login_video_frm p {font-size:16px;text-align:center;line-height:1.31;color:#444444;margin:25px 0 0px;}.login_video_frm p span {font-weight:bold;color:#0575b3;cursor:pointer;}.login_video_frm p.agreemnt {font-size:12px;color:#444444;}.login_video_frm p.agreemnt a {color:#0575b3;font-size:12px;display:inline-block;}.email_vari_cd .e_ch {text-align:left;}.email_vari_cd .e_ch span:first-child {font-size:16px;font-weight:bold;line-height:1.31;color:#444444;}.email_vari_cd .e_ch span:nth-last-child(2) {font-size:12px;line-height:1.75;color:#0575b3;cursor:pointer;margin-left:6px;}.email_vari_cd .e_ch p {font-size:14px;line-height:1.5;color:#444444;margin:2px 0 25px;text-align:left;}.terms-conditions-privacy {font-size:13px !important;font-weight:normal;font-stretch:normal;font-style:normal;line-height:1.54;letter-spacing:normal;text-align:left !important;color:#3a5075;}.terms-conditions-privacy .note {color:#192f60;font-weight:normal;}.terms-conditions-privacy a {font-weight:bold;color:#192f60;}.terms-conditions-privacy a:hover {color:#192f60;}@media only screen and (min-width:300px) and (max-width:767px) {.center_pop_video {background:#ffffff;}.center_pop_video .modal-dialog {width:100%;height:100%;}.center_pop_video .modal-dialog .modal-content {box-shadow:none;border:none;border-radius:0;}}.header_edureka .navbar .search_header::after {content:"\e90f" !important;}.slide-menu .controls::after {content:"\e904" !important;border-radius:50%;border:2px solid !important;display:inline-block;width:20px;height:20px;text-align:center;padding-top:3px;font-size:9px !important;-ms-transform:none !important;transform:none !important;opacity:.7 !important;}.nav_category {display:inline-block;width:100%;min-height:45px;box-shadow:0 2px 10px 0 rgba(0,0,0,0.2);background-color:#fff !important;padding:7px 40px 0;text-align:left;position:relative;overflow:hidden;max-height:45px;margin:0;border:none !important;}.nav_category .dropdown_category_list {display:inline-block;width:100px;float:left;margin-right:30px;}.nav_category .dropdown_category_list a small {display:block;width:auto;font-size:12px;color:#000;font-weight:400;}.nav_category .dropdown_category_list a span {display:block;width:100%;color:#000;font-size:14px;font-weight:600;line-height:10px;}.nav_category .dropdown_category_list a span b {margin-left:5px;}.nav_category .dropdown_category_list .dropdown_menu_multi_level {border-radius:0px;border:medium none;box-shadow:none;border-right:1px solid #d7d7d7;background:linear-gradient(to right,#f1f1f1,#f4f4f4);padding:0;width:280px;height:631px;top:0;position:relative;margin-top:11px;}.nav_category .dropdown_category_list .dropdown_menu_multi_level li a {display:inline-block;width:100%;font-size:13px;font-weight:400;color:#000;padding:7px 25px;white-space:normal;}.nav_category .dropdown_category_list .dropdown_menu_multi_level li a:hover {background:linear-gradient(96deg,#243be4,#248de4);color:#fff;}.nav_category .dropdown_category_list .dropdown_menu_multi_level .dropdown-submenu.active a {background:linear-gradient(96deg,#243be4,#248de4);color:#fff;}.nav_category .dropdown_category_list .dropdown_menu_multi_level .dropdown-submenu.active .dropdown-menu {border-radius:0px;border:medium none;display:block;position:absolute;left:280px;border-right:none;box-shadow:none;height:631px;top:0;width:280px;background:linear-gradient(to right,#fafafa,#f7f7f7);margin:0;}.nav_category .dropdown_category_list .dropdown_menu_multi_level .dropdown-submenu.active .dropdown-menu li a {padding:9px 25px;color:#4a4a4a;width:100%;font-size:13px;display:inline-block;background:transparent;white-space:normal;}.nav_category .dropdown_category_list .dropdown_menu_multi_level .dropdown-submenu.active .dropdown-menu li a:hover {font-weight:600 !important;color:#0c5397 !important;background:transparent;}.nav_category .dropdown_category_list .dropdown_menu_multi_level .dropdown-submenu.active .dropdown-menu .dropdown-menu {border-radius:0px;border:medium none;display:block;position:absolute;border-right:none;box-shadow:none;left:280px;height:631px;top:0;width:310px;background:linear-gradient(to right,#ffffff,#ffffff);margin:0;padding:0;}.nav_category .dropdown_category_list .dropdown_menu_multi_level .dropdown-submenu.active .dropdown-menu .dropdown-menu a {background:transparent;white-space:normal;}.nav_category .navbar-collapse.collapse {width:calc(100% - 130px);display:inline-block !important;padding:0;}.nav_category .navbar-collapse.collapse ul {padding:0;width:100%;}.nav_category .navbar-collapse.collapse ul li {display:inline-block;width:auto;margin-right:25px;line-height:33px;position:relative;}.nav_category .navbar-collapse.collapse ul li a {opacity:.9;border-radius:16.5px;font-size:14px;font-weight:400;color:#4a4a4a;padding:5px 10px;}.nav_category .navbar-collapse.collapse ul li a:hover {cursor:pointer;background:#efefef;}.nav_category .navbar-collapse.collapse ul li.nav-item.dropdown {margin-right:0;float:right;}.nav_category .navbar-collapse.collapse ul li.nav-item.dropdown .dropdown-menu {border-radius:2px;border:medium none;background:linear-gradient(to right,#f1f1f1,#f4f4f4);box-shadow:0 2px 4px 0 rgba(0,0,0,0.2);width:280px;padding:0;}.nav_category .navbar-collapse.collapse ul li.nav-item.dropdown .dropdown-menu li {display:inline-block;width:100%;margin-right:0;}.nav_category .navbar-collapse.collapse ul li.nav-item.dropdown .dropdown-menu li a {display:inline-block;white-space:normal;width:100%;font-size:13px;font-weight:400;color:#000;padding:7px 25px;border-radius:0;}.nav_category .navbar-collapse.collapse ul li.nav-item.dropdown .dropdown-menu li a:hover {background:linear-gradient(96deg,#243be4,#248de4);color:#fff;}.nav_category .navbar-collapse.collapse ul .new_pgp_category::before {content:'NEW';display:inline-block;position:absolute;top:0;right:20px;font-size:8px;font-weight:800;line-height:.75;text-align:center;color:#0c5397;z-index:1;}.nav_category .navbar-collapse.collapse ul .new_pgp_category::after {content:'';height:6px;width:6px;background-color:#0c5397;border-radius:50%;display:inline-block;position:absolute;top:0;right:9px;}.nav_category .masterbox {width:310px;min-height:631px;height:100%;display:inline-block;left:280px;top:0;background:#fff;padding:10px 20px 30px;float:right;}.nav_category .masterbox .title {display:inline-block;width:100%;text-align:center;position:relative;}.nav_category .masterbox .title hr {height:2px;background:#e6e6e6;width:100%;left:0;top:10px;position:absolute;z-index:1;margin:0;}.nav_category .masterbox .title .coursetype {display:inline-block;width:auto;text-align:center;color:#9b9b9b;font-size:12px;font-weight:600;position:relative;z-index:2;background:#fff;padding:0 20px;}.nav_category .masterbox .coursebox {display:inline-block;width:100%;padding:25px 0 20px !important;border-bottom:1px solid #e6e6e6;text-decoration:none;outline:0;cursor:pointer;}.nav_category .masterbox .coursebox .headmain {display:flex;width:100%;align-items:center;justify-content:left;}.nav_category .masterbox .coursebox .headmain .imgcont {display:flex;width:50px;min-width:50px;height:50px;opacity:.85;align-items:center;justify-content:center;}.nav_category .masterbox .coursebox .headmain .imgcont i {font-size:34px;color:#fff;}.nav_category .masterbox .coursebox .headmain .master_1 {background-image:linear-gradient(71deg,#0162af,#21c8db);}.nav_category .masterbox .coursebox .headmain .master_2 {background-image:linear-gradient(77deg,#bf3ef1,#ff6e6e);}.nav_category .masterbox .coursebox .headmain .master_3 {background-image:linear-gradient(255deg,#bdd377,#09adef);}.nav_category .masterbox .coursebox .headmain .master_4 {background-image:linear-gradient(105deg,#f8617f,#de51e3);}.nav_category .masterbox .coursebox .headmain .master_5 {background-image:linear-gradient(255deg,#ffaf8a,#f97273);}.nav_category .masterbox .coursebox .headmain .master_6 {background-image:linear-gradient(74deg,#55e4ef,#c23af1);}.nav_category .masterbox .coursebox .headmain .master_7 {background-image:linear-gradient(255deg,#5c63ff,#da2da1);}.nav_category .masterbox .coursebox .headmain h3 {margin:0;margin-left:15px;font-size:14px;width:calc(100% - 50px);display:inline-flex;line-height:20px;color:#4a4a4a;font-weight:600;}.nav_category .masterbox .coursebox .highlights {display:inline-block;list-style:none;padding:0;width:100%;margin-bottom:10px;margin-top:15px;min-height:auto;}.nav_category .masterbox .coursebox .highlights li {display:inline-block;width:32.33%;border-right:solid 1px #dcdcdc;justify-content:center;position:relative;top:0;left:0;}.nav_category .masterbox .coursebox .highlights li span.text {display:inline-block;width:100%;text-align:center;color:#9b9b9b;font-size:10px;font-style:italic;line-height:initial;}.nav_category .masterbox .coursebox .highlights li span.value {display:inline-block;width:100%;text-align:center;font-size:32px;font-weight:400;color:#4a4a4a;line-height:initial;}.nav_category .masterbox .coursebox .highlights li:last-child {border-right:medium none;}.nav_category .masterbox .coursebox .reviewstxt {font-size:10px;font-weight:400;font-style:italic;color:#9b9b9b;display:inline-block;width:100%;}.nav_category .masterbox .coursebox .reviewicons {display:inline-block;width:100%;}.nav_category .masterbox .coursebox .reviewicons i {color:#f0f0f0;display:inline;font-size:15px;margin-right:4px;}.nav_category .masterbox .coursebox .reviewicons i.yellow {color:#ffc700;}.nav_category .masterbox .coursebox .rating {font-size:14px;font-weight:600;color:#4a4a4a;display:inline-block;width:auto;}.nav_category .masterbox .coursebox .totalreviews {font-size:14px;font-weight:400;color:#4a4a4a;display:inline-block;width:auto;}.nav_category .masterbox .coursebox .detailbtn {border:1px solid #4a4a4a;padding:5px 20px;width:100%;background:#fff;font-size:14px;font-weight:400;font-style:italic;color:#4a4a4a;cursor:pointer;display:inline-block;text-align:center;margin-top:15px;line-height:inherit;}.nav_category .masterbox .coursebox .viewdetailbtn {padding:5px 20px;width:100%;border-radius:2px;background-color:#fff;font-size:14px;font-weight:600;color:#12589a;cursor:pointer;display:inline-block;text-align:center;margin-top:15px;text-transform:uppercase;border:1px solid #12589a;line-height:inherit;}.nav_category .masterbox .coursebox:last-child {border-bottom:medium none;}.nav_category .masterbox .normalcont .coursebox .highlights {padding:0;list-style:none;display:inline-block;width:100%;margin-bottom:5px;min-height:auto;margin-top:15px;}.nav_category .masterbox .normalcont .coursebox .highlights li {display:inline-flex;align-items:center;width:100%;margin-bottom:2px;position:relative;top:0;left:0;border-right:none;}.nav_category .masterbox .normalcont .coursebox .highlights li i {color:#ababab;font-size:11px;margin-right:7px;}.nav_category .masterbox .normalcont .coursebox .highlights li span {font-size:12px;color:#4a4a4a;font-weight:400;line-height:initial;}@media only screen and (min-width:300px) and (max-width:767px) {.nav_category {margin-top:45px;padding:7px 15px 0;}.nav_category .dropdown_category_list {margin-right:0;}.nav_category .dropdown_category_list .new_head_ham small {display:block;width:auto;font-size:12px;color:#000;font-weight:400;}.nav_category .dropdown_category_list .new_head_ham span {display:block;width:100%;color:#000;font-size:14px;font-weight:600;line-height:10px;}.nav_category .navbar-collapse.collapse {width:calc(100% - 100px);border:none;}.nav_category .navbar-collapse.collapse ul {margin:0;}.nav_category .navbar-collapse.collapse ul li {margin-right:10px;}.nav_category .navbar-collapse.collapse ul li.nav-item.dropdown {margin-right:0;top:8px;position:absolute;right:10px;}.nav_category .navbar-collapse.collapse ul li.nav-item.dropdown .dropdown-menu {position:absolute;min-height:100px;height:300px;overflow-y:auto;top:38px;}}body {background:#fff !important;}.two_date_at_top {position:relative;}.home_slick_slide {margin:0 !important;height:410px;overflow:hidden;background:#f5f5f5;margin-bottom:70px !important;}.home_slick_slide a {display:inline-block !important;min-height:410px !important;background-position:center;width:100%;}.home_slick_slide.slick-slider .slick-next {right:64px;}.home_slick_slide.slick-slider .slick-prev {left:64px;}.home_slick_slide.slick-slider .slick-dots {list-style:none;margin:0 auto;text-align:center;position:absolute;bottom:68px;padding:0;left:0;right:0;}.home_slick_slide.slick-slider .slick-dots li {display:inline-block;}.home_slick_slide.slick-slider .slick-dots li button {transition:0.2s background-color ease-in-out 0s;border:none;padding:0;color:transparent;width:7px;height:7px;background-color:#dddada;margin-right:25px;border-radius:50%;opacity:0.75 !important;}.home_slick_slide.slick-slider .slick-dots li.slick-active button {background-color:#fff;opacity:0.9 !important;}.home_slick_slide.slick-slider .slick-dots li:last-child button {margin-right:0;}@media only screen and (min-width:300px) and (max-width:767px) {.home_slick_slide.slick-slider .slick-next {right:10px;}.home_slick_slide.slick-slider .slick-prev {left:10px;}}.few_info_below_banner {position:absolute;bottom:-44px;left:0;right:0;}.few_info_below_banner .card_light_box a {display:inline-flex;background:#ffffff;height:90px;border-radius:2px;box-shadow:0 0 15px 1px rgba(0,0,0,0.15);align-items:center;justify-content:space-between;padding:25px 35px;width:100%;}.few_info_below_banner .card_light_box a span.text {font-size:16px;font-weight:400;line-height:1.25;color:#404040;display:inline-block;width:65%;text-align:left;text-transform:uppercase;}.few_info_below_banner .card_light_box a span.text span {font-weight:400;display:inline-block;width:100%;}.few_info_below_banner .card_light_box a span.knowmoretxt {font-size:12px;font-weight:800;text-align:right;color:#0c5397;display:inline-block;text-transform:uppercase;width:35%;}.few_info_below_banner .card_light_box a span.knowmoretxt i {font-size:12px;color:#0c5397;margin-left:0px;font-weight:800;}@media only screen and (min-width:300px) and (max-width:767px) {.few_info_below_banner {padding:0 5px;}.few_info_below_banner .container {padding:0;}.few_info_below_banner .container .row {margin:0;}.few_info_below_banner .card_light_box {padding:0 5px;}.few_info_below_banner .card_light_box a {display:inline-block;width:100%;padding:10px 15px;}.few_info_below_banner .card_light_box a span.text {font-size:12px;line-height:1.25;width:100%;text-align:left;margin-bottom:10px;}.few_info_below_banner .card_light_box a span.knowmoretxt {font-size:12px;text-align:left;width:100%;}.few_info_below_banner .card_light_box:last-child {display:none;}}@media only screen and (min-width:768px) and (max-width:991px) {.few_info_below_banner .container {padding:0;}.few_info_below_banner .card_light_box {padding:0 5px;}.few_info_below_banner .card_light_box a {padding:15px 15px;}.few_info_below_banner .card_light_box a span.text {font-size:14px;width:56%;}.few_info_below_banner .card_light_box a span.knowmoretxt {width:44%;}}@media only screen and (min-width:992px) and (max-width:1199px) {.few_info_below_banner .card_light_box {padding:0 5px;}.few_info_below_banner .card_light_box a {padding:15px 15px;}}.home_page_title_section {font-size:22px;font-weight:600;color:#404040;display:inline-block;width:100%;margin:20px 0 25px;}.two_cards,.four_cards {padding:0;}.two_cards.slick-slide .course_cards_home {width:46%;}.course_cards_home {padding:0;margin:10px 12px 20px 10px;width:46%;}.course_cards_home .homecardmain {display:inline-block;outline:none;width:100%;}.course_cards_home .homecardmain:hover .hover_display {display:block;z-index:0;opacity:0.9;}.course_cards_home .first_display {display:inline-block;width:100%;border-radius:2px;background-color:#ffffff;box-shadow:9px 6px 22px 0 rgba(0,0,0,0.08);text-decoration:none;outline:0;cursor:pointer;position:relative;}.course_cards_home .first_display .courseimgmain {display:flex;align-items:center;height:108px;width:100%;overflow:hidden;padding:20px 10px;position:relative;}.course_cards_home .first_display .courseimgmain img {position:absolute;right:10px;top:0;width:28px;}.course_cards_home .first_display .courseimgmain i {font-size:50px;display:inline-block;color:#ffffff;margin-right:10px;}.course_cards_home .first_display .courseimgmain .cr_title {display:inline-block;width:100%;font-size:16px;color:#ffffff;line-height:20px;margin:0;text-transform:uppercase;font-weight:bold;}.course_cards_home .first_display .coursedetails {display:inline-block;width:100%;padding:21px 20px 26px;}.course_cards_home .first_display .coursedetails h3 {display:flex;align-items:center;color:#4a4a4a;width:100%;font-size:16px;font-weight:600;margin:0px 0px 9px 0px;line-height:24px;height:50px;}.course_cards_home .first_display .coursedetails .reviewstxt {font-size:10px;font-weight:400;font-style:italic;color:#9b9b9b;display:inline-block;width:100%;margin-bottom:6px;}.course_cards_home .first_display .coursedetails .reviewicons {display:inline-block;width:100%;}.course_cards_home .first_display .coursedetails .reviewicons i {color:#f0f0f0;display:inline;font-size:14px;margin-right:7px;}.course_cards_home .first_display .coursedetails .reviewicons i.yellow {color:#ffc700;}.course_cards_home .first_display .coursedetails .reviewicons .rating {font-size:14px;font-weight:600;color:#4a4a4a;}.course_cards_home .first_display .coursedetails .reviewicons .totalreviews {font-size:14px;font-weight:400;color:#4a4a4a;}.course_cards_home .hover_display {width:100%;border-radius:2px;background-color:#000000;padding:20px;cursor:pointer;display:none;position:absolute;top:0;left:0;height:100%;right:0;z-index:-1;}.course_cards_home .hover_display .batchtxt {font-size:10px;font-weight:400;font-style:italic;color:#ffffff;display:inline-block;width:100%;margin-bottom:4px;margin-top:10px;}.course_cards_home .hover_display .nextbatch {display:inline-flex;width:100%;color:#ffffff;font-size:14px;font-weight:600;margin-bottom:15px;}.course_cards_home .hover_display .nextbatch .value {font-weight:400;margin-right:3px;}.course_cards_home .hover_display .learnlist {font-size:10px;font-weight:400;font-style:italic;color:#ffffff;display:inline-block;width:100%;}.course_cards_home .hover_display ul {display:inline-block;width:100%;padding:5px 0 0 0px;list-style-position:inside;list-style-type:disc;margin-bottom:10px;}.course_cards_home .hover_display ul li {font-size:12px;font-weight:400;color:#ffffff;margin-bottom:5px;width:100%;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}.course_cards_home .hover_display .seemorebtn {border:solid 1px #ffffff;display:inline-block;width:100%;text-align:center;padding:9px 40px;text-decoration:none;cursor:pointer;outline:0;background:transparent;text-transform:uppercase;color:#ffffff;font-size:12px;font-weight:600;}.course_cards_home.course_cards_home_pgp .first_display .courseimgmain {overflow:inherit;}.course_cards_home.course_cards_home_pgp .first_display .courseimgmain .cr_title {font-size:15px;}.course_cards_home.course_cards_home_pgp .first_display .courseimgmain .cr_title span.subtxt {font-size:11px;margin:0 0 2px 0;}.course_cards_home.course_cards_home_pgp .first_display .courseimgmain .cr_title span {font-size:18px;font-weight:bold;text-transform:uppercase;display:inline-block;width:100%;}.course_cards_home.course_cards_home_pgp .first_display .coursedetails {padding:19px 20px 20px;}.course_cards_home.course_cards_home_pgp .first_display .coursedetails .titledesk {font-size:14px;font-weight:400;color:#000;display:inline-block;width:100%;line-height:20px;margin:0 0 5px 0;height:auto;}.course_cards_home.course_cards_home_pgp .first_display .coursedetails .highlights {padding:0;list-style:none;display:inline-block;width:100%;margin:0 0 5px 15px;}.course_cards_home.course_cards_home_pgp .first_display .coursedetails .highlights li {display:list-item;width:100%;margin-bottom:2px;font-size:10px;font-weight:400;color:#000;text-overflow:ellipsis;white-space:nowrap;list-style-type:disc;}.course_cards_home.course_cards_home_pgp .first_display .coursedetails .viewdetailsbtn {border:1px solid #0c5397;display:inline-block;width:100%;text-align:center;padding:7px 40px;text-decoration:none;cursor:pointer;outline:0;background:0 0;text-transform:uppercase;color:#12589a;font-size:11px;font-weight:600;}.course_cards_home.course_cards_home_pgp .launchbanner.pgp {font-size:12px;position:absolute;display:inline-block;margin:0;text-align:center;width:100%;top:-5px;left:0;}.course_cards_home.course_cards_home_pgp .launchbanner.pgp::before {top:17px;left:-11px;border-width:8px 7px 9px 7px;border-color:#b27f14 #b27f14 #b27f14 transparent;z-index:0;content:'';position:absolute;border-style:solid;}.course_cards_home.course_cards_home_pgp .launchbanner.pgp::after {top:17px;right:-12px;border-width:8px 5px 9px 7px;border-color:#b27f14 transparent #b27f14 #b27f14;z-index:0;content:'';position:absolute;border-style:solid;}.course_cards_home.course_cards_home_pgp .launchbanner.pgp .text {display:inline-block;padding:8px 30px;width:100%;font-size:13px;color:#000000;font-weight:bold;text-transform:uppercase;text-decoration:none;line-height:1.2em;background:linear-gradient(278deg,#bc871d,#f1d46f 31%,#fff3a4 52%,#e6c55e 68%,#d0a53b 77%,#c59529 86%,#b27f14);position:relative;box-shadow:6px 4px 22px 0 rgba(0,0,0,0.3);z-index:2;}.slick-slider .slick-prev {position:absolute;background:#ffffff;border:none;color:transparent;font-size:0;width:55px;height:55px;left:-30px;top:39%;border-radius:50%;box-shadow:0 5px 50px 0 rgba(107,107,107,0.25);z-index:1;}.slick-slider .slick-prev::before {content:"\e901";font-family:'icomoon' !important;font-style:normal;color:#000000;font-size:20px;}.slick-slider .slick-next {position:absolute;background:#ffffff;border:none;color:transparent;font-size:0;width:55px;height:55px;right:-18px;top:39%;border-radius:50%;box-shadow:0 5px 50px 0 rgba(107,107,107,0.25);z-index:1;}.slick-slider .slick-next::before {content:"\e902";font-family:'icomoon' !important;font-style:normal;color:#000000;font-size:20px;}.slick-arrow.slick-disabled {display:none !important;}.career_related_master_slider,.recent_additions_slider {height:273px;overflow:hidden;}.career_related_master_slider.slick-initialized,.recent_additions_slider.slick-initialized {height:auto;overflow:visible;}.homeloader {position:absolute;left:0;right:0;bottom:0;top:0%;width:100%;height:100%;background:rgba(255,255,255,0.5);display:flex;align-items:center;z-index:2;min-height:200px;}.cssload-loader {width:97px;height:19px;position:absolute;left:50%;transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);}.cssload-loader div {content:" ";width:19px;height:19px;background:#0091ff;border-radius:100%;position:absolute;animation:cssload-shift 3.8s linear infinite;-o-animation:cssload-shift 3.8s linear infinite;-ms-animation:cssload-shift 3.8s linear infinite;-webkit-animation:cssload-shift 3.8s linear infinite;-moz-animation:cssload-shift 3.8s linear infinite;}.cssload-loader div:nth-of-type(1) {animation-delay:-0.76s;-o-animation-delay:-0.76s;-ms-animation-delay:-0.76s;-webkit-animation-delay:-0.76s;-moz-animation-delay:-0.76s;}.cssload-loader div:nth-of-type(2) {animation-delay:-1.52s;-o-animation-delay:-1.52s;-ms-animation-delay:-1.52s;-webkit-animation-delay:-1.52s;-moz-animation-delay:-1.52s;}.cssload-loader div:nth-of-type(3) {animation-delay:-2.28s;-o-animation-delay:-2.28s;-ms-animation-delay:-2.28s;-webkit-animation-delay:-2.28s;-moz-animation-delay:-2.28s;}.cssload-loader div:nth-of-type(4) {animation-delay:-3.04s;-o-animation-delay:-3.04s;-ms-animation-delay:-3.04s;-webkit-animation-delay:-3.04s;-moz-animation-delay:-3.04s;}@keyframes cssload-shift {0% {left:-58px;opacity:0;background-color:#b5fdff;}10% {left:0;opacity:1;}90% {left:97px;opacity:1;}100% {left:156px;background-color:#0084ff;opacity:0;}}@-o-keyframes cssload-shift {0% {left:-58px;opacity:0;background-color:#b5fdff;}10% {left:0;opacity:1;}90% {left:97px;opacity:1;}100% {left:156px;background-color:#0084ff;opacity:0;}}@-ms-keyframes cssload-shift {0% {left:-58px;opacity:0;background-color:#b5fdff;}10% {left:0;opacity:1;}90% {left:97px;opacity:1;}100% {left:156px;background-color:#0084ff;opacity:0;}}@media only screen and (min-width:300px) and (max-width:767px) {.course_cards_home.course_cards_home_pgp .launchbanner.pgp .text {padding:4px 3px;font-size:10px;box-shadow:6px 6px 11px 0 rgba(0,0,0,0.3);}.course_cards_home.course_cards_home_pgp .homecardmain .first_display .courseimgmain {height:130px;}.home_page_title_section {font-size:16px;margin:15px 0 15px;}.course_cards_home {margin:10px 10px 10px 10px;width:100%;}.course_cards_home .homecardmain .first_display {display:flex;align-items:center;}.course_cards_home .homecardmain .first_display .courseimgmain {width:93px;min-width:93px;height:100px;justify-content:center;}.course_cards_home .homecardmain .first_display .courseimgmain i {margin:0;}.course_cards_home .homecardmain .first_display .coursedetails {padding:11px 10px 11px 15px;}.course_cards_home .homecardmain .first_display .coursedetails h3 {font-size:14px;height:auto;}.course_cards_home .homecardmain .hover_display {display:none !important;}.slick-slider .slick-next {right:0;width:40px;height:40px;}.slick-slider .slick-next::before {font-size:16px;}.slick-slider .slick-prev {left:0;width:40px;height:40px;}.slick-slider .slick-prev::before {font-size:16px;padding-right:4px;position:relative;top:1px;}.two_cards.slick-slide .course_cards_home {width:100%;}.career_related_programs .container {padding:0;}.recent_additions .container {padding:0;}}.trending_courses .navbar {border:none;min-height:auto;background:#fff;height:37px;overflow:hidden;}.trending_courses .navbar .navbar-header {display:none;}.trending_courses .navbar .navbar-collapse {padding:0;border:none;}.trending_courses .navbar .navbar-collapse ul {border:none;}.trending_courses .navbar .navbar-collapse ul li {width:auto;white-space:nowrap;display:inline-block;background:#fff;padding:0 0px;float:none;}.trending_courses .navbar .navbar-collapse ul li a {font-size:17px;font-weight:500;text-align:center;white-space:nowrap;color:#757575;display:inline-block;width:100%;padding:3px 15px;background:#ffffff;cursor:pointer;text-decoration:none;outline:0;border:none;box-shadow:none;}.trending_courses .navbar .navbar-collapse ul li.active a {font-weight:600;font-size:18px;color:#404040;border-bottom:5px solid #0f4e91;background:transparent;}.trending_courses .navbar .navbar-collapse .dropdown {display:inline-block;float:right;padding:6px 0;}.trending_courses .navbar .navbar-collapse .dropdown a {font-size:14px;font-weight:400;color:#4a4a4a;padding:5px 10px;}.trending_courses .navbar .navbar-collapse .dropdown .nav_tabs_course_drop {border:medium none;box-shadow:0 0 10px 0 rgba(0,0,0,0.17);background:#ffffff;border-radius:2px;right:0px;top:47px;padding:0;margin:0;}.trending_courses .navbar .navbar-collapse .dropdown .nav_tabs_course_drop::before {content:"";position:absolute;width:0;height:0;bottom:0;left:99%;box-sizing:border-box;border:10px solid #000000;border-color:#ffffff;transform-origin:0 0;transform:rotate(-225deg);box-shadow:-2px 2px 4px 0 rgba(0,0,0,0.12);top:2px;z-index:-1;}.trending_courses .navbar .navbar-collapse .dropdown .nav_tabs_course_drop li {width:100%;}.trending_courses .navbar .navbar-collapse .dropdown .nav_tabs_course_drop li a {font-size:14px;color:#4a4a4a;font-weight:400;display:inline-block;width:100%;min-width:240px;padding:7px 15px;box-shadow:none;text-align:left;}.trending_courses .navbar .navbar-collapse .dropdown .nav_tabs_course_drop li a:hover {background:linear-gradient(96deg,#243be4,#248de4);color:#ffffff;}.trending_courses .tab-content {margin-bottom:30px;position:relative;min-height:293px;}.trending_courses .tab-content .active {display:inline-block;width:100%;}.trending_courses .tab-content .slick-track {margin-left:0;margin-right:0;}@media only screen and (min-width:300px) and (max-width:767px) {.trending_courses .tab-content {margin-bottom:20px;min-height:245px;}.trending_courses .navbar {margin-bottom:10px;}.navbar_course_list .navbar-brand {font-weight:bold;white-space:nowrap;padding:8px 5px 0 0;text-overflow:ellipsis;overflow:hidden;width:calc(100% - 47px);font-size:14px;height:auto;min-height:auto;}.navbar_course_list .navbar-toggle {margin:0;}.navbar_course_list .navbar-collapse {position:relative;z-index:2;background:#ffffff;box-shadow:0 0 20px 0px rgba(0,0,0,0.2);min-height:100px;height:250px;overflow:hidden;}.navbar_course_list .navbar-collapse ul {margin:0;height:250px;overflow-y:auto;}.navbar_course_list .navbar-collapse ul li {width:100% !important;}.navbar_course_list .navbar-collapse ul li a {text-align:left !important;}}.all_coutsr_redirect {text-align:center;}.all_coutsr_redirect a {display:inline-block;width:auto;border-radius:2px;background:linear-gradient(98deg,#248de4,#243be4);padding:6px 27px;color:#ffffff !important;font-size:16px;text-transform:capitalize;font-weight:600;margin:0 0 10px 0;}.all_coutsr_redirect p {font-size:18px;font-weight:400;font-style:italic;color:#4a4a4a;display:inline-block;width:100%;text-align:center;margin-top:0;}@media only screen and (min-width:300px) and (max-width:767px) {.all_coutsr_redirect a {margin-top:5px;}.all_coutsr_redirect p {font-size:14px;padding-bottom:15px;}}</style>
+    <link href="https://d1jnx9ba8s6j9r.cloudfront.net/manifest.json" rel="manifest">
+
+    </head>
+    <body style="margin-top: 60px;">
+
+        
+
+</header><nav class="navbar navbar-default nav_category">
+            <div class="dropdown dropdown_category_list">
+                <div class="new_head_ham slide-menu-control hidden-md hidden-lg" id="mobile_side_menu_triger" aria-label="humburger" role="button" data-target="test-menu-left" data-action="open">
+                    <small>Browse</small><span class="">Categories<b class="caret"></b></span>
+                </div>
+                <a href="#" class="dropdown-toggle hidden-xs hidden-sm ga_browse_top_cat" data-toggle="dropdown"><small>Browse</small><span class="">Categories<b class="caret"></b></span></a>
+                <ul class="dropdown-menu dropdown_menu_multi_level hidden-xs hidden-sm">
+                                    <li class="dropdown-submenu dropdown_submenu_multi active ">
+                        <!-- Level 1 -->
+                        <a href="/cloud-computing-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Cloud Computing</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/cloud-architect-training" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >Cloud Architect Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/cloud-architect-training"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>Cloud Architect Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">12</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value">250</span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">16k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i>   <span class="rating">4.4</span>
+                                                    <span class="totalreviews">(6200)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/azure-cloud-engineer-certification-training" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >MS Azure Cloud Engineer Masters Program</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/aws-certification-training" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >AWS Certification Training - Solutions Architect </a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/microservices-architecture-training" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >Microservices Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/salesforce-administrator-and-developer-training" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >Salesforce Certification Training: Admin 201 and App Builder</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/microsoft-certified-azure-solution-architect-certification-training" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >Microsoft Certified Expert: Azure Solutions Architect (AZ-303) </a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/google-cloud-architect-certification-training" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >Cloud Architect Certification Training - Google Cloud</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/microsoft-azure-developer-associate-certification-training-course" class="ga_top_categories_course" data-categoryName ='Cloud Computing' >Microsoft Azure Developer Associate Training (AZ-204)</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/devops-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">DevOps</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/devops-engineer-training" class="ga_top_categories_course" data-categoryName ='DevOps' >DevOps Engineer Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/devops-engineer-training"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>DevOps Engineer Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">12</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value">250</span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">19k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-half-star_ico yellow"></i>   <span class="rating">4.5</span>
+                                                    <span class="totalreviews">(7400)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/devops-certification-training" class="ga_top_categories_course" data-categoryName ='DevOps' >DevOps Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/kubernetes-certification" class="ga_top_categories_course" data-categoryName ='DevOps' >Kubernetes Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/aws-certified-devops-training" class="ga_top_categories_course" data-categoryName ='DevOps' >AWS Certified DevOps Engineer Training </a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/docker-training" class="ga_top_categories_course" data-categoryName ='DevOps' >Docker Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/git-github-sp" class="ga_top_categories_course" data-categoryName ='DevOps' >Git and GitHub</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/jenkins" class="ga_top_categories_course" data-categoryName ='DevOps' >Continuous Integration with Jenkins Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/bi-and-visualization-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">BI and Visualization</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/business-intelligence-certification" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >Business Intelligence Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/business-intelligence-certification"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>Business Intelligence Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">13</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value">200</span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">5k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i>   <span class="rating">4.2</span>
+                                                    <span class="totalreviews">(1800)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/tableau-certification-training" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >Tableau Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/power-bi-certification-training" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >Microsoft Power BI Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/microsoft-bi-certification" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >Microsoft BI Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/pentaho-business-intelligence-training-self-paced" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >Pentaho BI Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/advanced-ms-excel-self-paced" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >Advanced MS Excel 2016 Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/qlikview-certification-training" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >QlikView Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/microstrategy-10-bi" class="ga_top_categories_course" data-categoryName ='BI and Visualization' >MicroStrategy 10 Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/data-science-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Data Science</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/data-scientist-certification" class="ga_top_categories_course" data-categoryName ='Data Science' >Data Science Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/data-scientist-certification"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>Data Science Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">13</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value">200</span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">26k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i>   <span class="rating">4.4</span>
+                                                    <span class="totalreviews">(10200)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/data-analyst-certification" class="ga_top_categories_course" data-categoryName ='Data Science' >Data Analytics Masters Program</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/data-science-python-certification-course" class="ga_top_categories_course" data-categoryName ='Data Science' >Data Science Certification Training with Python</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/python-programming-certification-training" class="ga_top_categories_course" data-categoryName ='Data Science' >Python Programming Certification Course</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/machine-learning-certification-training" class="ga_top_categories_course" data-categoryName ='Data Science' >Machine Learning Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/data-analytics-with-r-certification-training" class="ga_top_categories_course" data-categoryName ='Data Science' >Data Analytics with R Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/data-science-r-programming-certification-course" class="ga_top_categories_course" data-categoryName ='Data Science' >Data Science Certification Course using R</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/sas-training" class="ga_top_categories_course" data-categoryName ='Data Science' >SAS Training and Certification</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/big-data-and-analytics" class="dropdown-toggle ga_top_category" data-toggle="">Big Data</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/big-data-architect-training" class="ga_top_categories_course" data-categoryName ='Big Data' >Big Data Architect Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/big-data-architect-training"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>Big Data Architect Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">9</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value">250</span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">13k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i>   <span class="rating">4.4</span>
+                                                    <span class="totalreviews">(4900)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/big-data-hadoop-training-certification" class="ga_top_categories_course" data-categoryName ='Big Data' >Big Data Hadoop Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/pyspark-certification-training" class="ga_top_categories_course" data-categoryName ='Big Data' >Python Spark Certification Training using PySpark</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/kafka-certification-training" class="ga_top_categories_course" data-categoryName ='Big Data' >Apache Kafka Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/apache-spark-scala-certification-training" class="ga_top_categories_course" data-categoryName ='Big Data' >Apache Spark and Scala Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/splunk-certification-training" class="ga_top_categories_course" data-categoryName ='Big Data' >Splunk Training &amp; Certification- Power User &amp; Admin</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/hadoop-administration-training-certification" class="ga_top_categories_course" data-categoryName ='Big Data' >Hadoop Administration Certification Training  </a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/apache-solr-self-paced" class="ga_top_categories_course" data-categoryName ='Big Data' >Apache Solr Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/project-management-and-methodologies-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Project Management and Methodologies</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/pmp-certification-exam-training" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >PMP Certification Training Course</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/pmp-certification-exam-training" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_1321_1611309477.png" alt="PMP Certification Training Course" class="img_icon_small lazyImages" >
+                                                    <h3>PMP Certification Training Course</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>41k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4.1</span>
+                                                    <span class="totalreviews">(16250)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/certified-scrum-master-certification-training" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >Certified Scrum Master Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/prince2-foundation-and-practitioner-certification-training" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >PRINCE2&reg; Foundation &amp; Practitioner Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/pmi-acp" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >PMI&reg; Agile Certified Practitioner Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/professional-scrum-master-psm-certification-training" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >Professional Scrum Master (PSM) Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/cspo-certification-training" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >CSPO&reg; Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/itil-foundation-sp" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >ITIL&reg; Foundation Certification Training Version 3</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/six-sigma-green-belt-self-paced" class="ga_top_categories_course" data-categoryName ='Project Management and Methodologies' >Six Sigma Green Belt Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/programming-and-frameworks-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Programming & Frameworks</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/full-stack-developer-training" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >Full Stack Web Developer Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/full-stack-developer-training"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>Full Stack Web Developer Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">9</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value">200</span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">22k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i>   <span class="rating">4</span>
+                                                    <span class="totalreviews">(8700)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/python-developer-training" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >Python Developer Masters Program</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/java-j2ee-training-course" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >Java Certification Training Course</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/python-django" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >Python Django Training and Certification</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/spring-certification-course" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >Spring Framework Certification Training </a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/nodejs-certification-training" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >Node.js Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/microsoft-dotnet-framework-self-paced" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >Microsoft .NET Framework Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/php-mysql-self-paced" class="ga_top_categories_course" data-categoryName ='Programming & Frameworks' >PHP &amp; MySQL with MVC Frameworks Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/software-testing-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Software Testing</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/automation-testing-engineer-training" class="ga_top_categories_course" data-categoryName ='Software Testing' >Test Automation Engineer Masters Program </a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/automation-testing-engineer-training"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>Test Automation Engineer Masters Program </h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">8</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value"></span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">4k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i>   <span class="rating">4.1</span>
+                                                    <span class="totalreviews">(1600)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/selenium-certification-training" class="ga_top_categories_course" data-categoryName ='Software Testing' >Selenium Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/appium-training-mobile-automation-testing" class="ga_top_categories_course" data-categoryName ='Software Testing' >Mobile App Testing Using Appium</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/software-testing" class="ga_top_categories_course" data-categoryName ='Software Testing' >Manual Testing Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/jmeter-training-performance-testing" class="ga_top_categories_course" data-categoryName ='Software Testing' >Performance Testing Using JMeter</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/software-testing-fundamentals-training" class="ga_top_categories_course" data-categoryName ='Software Testing' >Software Testing Fundamentals Course</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/continuous-testing-devops-training" class="ga_top_categories_course" data-categoryName ='Software Testing' >Continuous Testing in DevOps</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/automation-testing-testcomplete" class="ga_top_categories_course" data-categoryName ='Software Testing' >Automation Testing using TestComplete 11.0</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/frontend-development-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Frontend Development</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/angular-training" class="ga_top_categories_course" data-categoryName ='Frontend Development' >Angular Certification Training</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/angular-training" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_885_1578899142.svg" alt="Angular Certification Training" class="img_icon_small lazyImages" >
+                                                    <h3>Angular Certification Training</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>16k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4</span>
+                                                    <span class="totalreviews">(6350)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/reactjs-redux-certification-training" class="ga_top_categories_course" data-categoryName ='Frontend Development' >React with Redux Certification Training </a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/complete-web-developer" class="ga_top_categories_course" data-categoryName ='Frontend Development' >Web Development Certification Training </a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/javascript-jquery-training" class="ga_top_categories_course" data-categoryName ='Frontend Development' >JavaScript and JQuery Essentials Training and Certification</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/jquery-ui-development" class="ga_top_categories_course" data-categoryName ='Frontend Development' >jQuery UI Development</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/robotic-process-automation-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Robotic Process Automation</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/rpa-developer-training" class="ga_top_categories_course" data-categoryName ='Robotic Process Automation' >RPA Developer Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/rpa-developer-training"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>RPA Developer Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">3</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value"></span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">1k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i>   <span class="rating">4.4</span>
+                                                    <span class="totalreviews">(300)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/robotic-process-automation-training" class="ga_top_categories_course" data-categoryName ='Robotic Process Automation' >RPA Certification Training using UiPath</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/automation-anywhere-certification-training" class="ga_top_categories_course" data-categoryName ='Robotic Process Automation' >RPA using Automation Anywhere</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/digital-marketing-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Digital Marketing</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/digital-marketing" class="ga_top_categories_course" data-categoryName ='Digital Marketing' >Digital Marketing Certification Training</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/digital-marketing" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_1282_1607679933.png" alt="Digital Marketing Certification Training" class="img_icon_small lazyImages" >
+                                                    <h3>Digital Marketing Certification Training</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>7k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4</span>
+                                                    <span class="totalreviews">(2700)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/digital-media-analytics-sp" class="ga_top_categories_course" data-categoryName ='Digital Marketing' >Mastering Google Analytics</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/measuring-social-media-roi-self-paced" class="ga_top_categories_course" data-categoryName ='Digital Marketing' >Measuring Social Media ROI</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/data-warehousing-and-etl-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Data Warehousing and ETL</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/informatica-certification-training" class="ga_top_categories_course" data-categoryName ='Data Warehousing and ETL' >Informatica Certification Training </a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/informatica-certification-training" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_442_1540194723.svg" alt="Informatica Certification Training " class="img_icon_small lazyImages" >
+                                                    <h3>Informatica Certification Training </h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>17k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4</span>
+                                                    <span class="totalreviews">(6600)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/talend-for-big-data" class="ga_top_categories_course" data-categoryName ='Data Warehousing and ETL' >Talend for Data Integration and Big data</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/data-warehousing-and-bi" class="ga_top_categories_course" data-categoryName ='Data Warehousing and ETL' >Data Warehousing and BI Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/datawarehousing-self-paced" class="ga_top_categories_course" data-categoryName ='Data Warehousing and ETL' >Data Warehousing Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/artificial-intelligence-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Artificial Intelligence</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/machine-learning-engineer-training" class="ga_top_categories_course" data-categoryName ='Artificial Intelligence' >Machine Learning Course Masters Program</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="mastercont">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Master Program</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/machine-learning-engineer-training"  class="coursebox coursebox-masterprogram cloud-computing-certification-courses-card" style="">
+                                                <div class="headmain">
+                                                    <div class="imgcont master_1"> <i class="icon-Master_course_logo"></i> 
+                                                    </div>
+                                                    <h3>Machine Learning Course Masters Program</h3>
+                                                </div>
+                                                <ul class="highlights">
+                                                    <li> <span class="text">Courses</span>
+                                                        <span class="value">10</span>
+                                                    </li>
+                                                    <li> <span class="text">Hours</span>
+                                                        <span class="value">200</span>
+                                                    </li>
+                                                    <li> <span class="text">Learners</span>
+                                                        <span class="value">10k</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-half-star_ico yellow"></i>   <span class="rating">4.5</span>
+                                                    <span class="totalreviews">(3900)</span>
+                                                </div> <span class="detailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/ai-deep-learning-with-tensorflow" class="ga_top_categories_course" data-categoryName ='Artificial Intelligence' >Deep Learning Training - TensorFlow Certification</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/python-natural-language-processing-course" class="ga_top_categories_course" data-categoryName ='Artificial Intelligence' >Natural Language Processing with Python Certification Course</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/graphical-modelling-course" class="ga_top_categories_course" data-categoryName ='Artificial Intelligence' >Graphical Models Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/reinforcement-learning-course" class="ga_top_categories_course" data-categoryName ='Artificial Intelligence' >Reinforcement Learning</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/mahout-self-paced" class="ga_top_categories_course" data-categoryName ='Artificial Intelligence' >Machine Learning with Mahout Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/cyber-security-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Cyber Security</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/cybersecurity-certification-training" class="ga_top_categories_course" data-categoryName ='Cyber Security' >Cybersecurity Certification Course</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/cybersecurity-certification-training" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_1269_1606307851.svg" alt="Cybersecurity Certification Course" class="img_icon_small lazyImages" >
+                                                    <h3>Cybersecurity Certification Course</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>28k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4.2</span>
+                                                    <span class="totalreviews">(11050)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/comptia-security-plus-certification-training" class="ga_top_categories_course" data-categoryName ='Cyber Security' >CompTIA Security+ Certification Training - SY0-601</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/mobile-development-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Mobile Development</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/android-development-certification-course" class="ga_top_categories_course" data-categoryName ='Mobile Development' >Android App Development Certification Training</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/android-development-certification-course" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_318_1501579329.png" alt="Android App Development Certification Trai.." class="img_icon_small lazyImages" >
+                                                    <h3>Android App Development Certification Trai..</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>61k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4</span>
+                                                    <span class="totalreviews">(24400)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/ios-development" class="ga_top_categories_course" data-categoryName ='Mobile Development' >iOS App Development Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/databases-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Databases</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/cassandra" class="ga_top_categories_course" data-categoryName ='Databases' >Apache Cassandra Certification  Training</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/cassandra" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_509_1512976416.png" alt="Apache Cassandra Certification  Training" class="img_icon_small lazyImages" >
+                                                    <h3>Apache Cassandra Certification  Training</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>13k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4.4</span>
+                                                    <span class="totalreviews">(5000)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/sql-essentials-training" class="ga_top_categories_course" data-categoryName ='Databases' >SQL Essentials Training &amp; Certification</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/mongodb-certification-training" class="ga_top_categories_course" data-categoryName ='Databases' >MongoDB Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/mysql-dba" class="ga_top_categories_course" data-categoryName ='Databases' >MySQL DBA Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/teradata" class="ga_top_categories_course" data-categoryName ='Databases' >Teradata Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/neo4j" class="ga_top_categories_course" data-categoryName ='Databases' >Mastering Neo4j Graph Database Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/operating-systems-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Operating Systems</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/linux-admin" class="ga_top_categories_course" data-categoryName ='Operating Systems' >Linux Administration Certification Training</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/linux-admin" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_64_1540541847.svg" alt="Linux Administration Certification Trainin.." class="img_icon_small lazyImages" >
+                                                    <h3>Linux Administration Certification Trainin..</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>10k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4.2</span>
+                                                    <span class="totalreviews">(3800)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/unix" class="ga_top_categories_course" data-categoryName ='Operating Systems' >Unix Shell Scripting Certification Training</a></li>                                    
+                                                        
+                            
+                                                        <li><a href="/linux-fundamentals-self-paced" class="ga_top_categories_course" data-categoryName ='Operating Systems' >Linux Fundamentals Certification Training</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/blockchain-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Blockchain</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/blockchain-training" class="ga_top_categories_course" data-categoryName ='Blockchain' >Blockchain Certification Training </a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/blockchain-training" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_879_1563949543.svg" alt="Blockchain Certification Training " class="img_icon_small lazyImages" >
+                                                    <h3>Blockchain Certification Training </h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>19k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-half-star_ico yellow"></i> <span class="rating">4.5</span>
+                                                    <span class="totalreviews">(7600)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                            <li><a href="/ethereum-developer-course" class="ga_top_categories_course" data-categoryName ='Blockchain' >Ethereum Developer Certification Course</a></li>                                    
+                                                        
+                            
+                                                    </ul>
+                    </li> 
+                                    <li class="dropdown-submenu dropdown_submenu_multi  ">
+                        <!-- Level 1 -->
+                        <a href="/architecture-and-design-patterns-certification-courses" class="dropdown-toggle ga_top_category" data-toggle="">Architecture & Design Patterns</a>
+                        <!-- Level 2 -->
+                        <ul class="dropdown-menu">
+                                                    <li><a href="/design-patterns-self-paced" class="ga_top_categories_course" data-categoryName ='Architecture & Design Patterns' >Design Patterns Certification Training</a></li>                                    
+                                                        
+                            
+                            <li class="dropdown-submenu">
+                                <!-- Level 3 -->
+                                <ul class="dropdown-menu">
+                                    <div class="masterbox hidden-xs">
+                                                                              <div class="normalcont" style="display: block;">
+                                            <div class="title">
+                                                <hr> <span class="coursetype">Live Course</span>
+                                            </div>
+                                            <a href="https://www.edureka.co/design-patterns-self-paced" class="coursebox coursebox-single c514"   style="">
+                                                <div class="headmain">
+                                                    <img style="max-height:50px;max-width:50px;"  data-src="https://d1jnx9ba8s6j9r.cloudfront.net/imgver.1614839129/img/s/co_img_137_1504782046.png" alt="Design Patterns Certification Training" class="img_icon_small lazyImages" >
+                                                    <h3>Design Patterns Certification Training</h3>
+                                                </div>
+                                                <ul class="highlights hidden-xs">
+                                                    <li> <i class="icon-total-learners"></i>
+                                                        <span>4k Enrolled Learners</span>
+                                                    </li>
+                                                    <li> <i class="icon-calender"></i>
+                                                        <span>Weekend</span>
+                                                    </li>
+                                                    <li> <i class="icon-live-instructor"></i>
+                                                        <span>Live Class</span>
+                                                    </li>
+                                                </ul> <span class="reviewstxt hidden-xs">Reviews</span>
+                                                <div class="reviewicons"> <i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico yellow"></i><i class="icon-filled_star_ico"></i> <span class="rating">4.2</span>
+                                                    <span class="totalreviews">(1250)</span>
+                                                </div> <span class="viewdetailbtn">View Details</span>
+                                            </a>
+                                        </div>
+                                                                          </div>
+                                </ul>
+                            </li>                        </ul>
+                    </li> 
+                                                                
+                </ul>
+            </div> 
+
+
+ 
+ 
+  </div>
+</div>
+</a>        <link  href="https://d1jnx9ba8s6j9r.cloudfront.net/css-cache/cache-autoload-home_optimized-318125ce59193b65c44131ed20e603d6.css" rel="stylesheet" type="text/css" ><script src="https://d1jnx9ba8s6j9r.cloudfront.net/js-cache/cache-autoload-home_optimized-d030ba978af55e99663887d1f923a8cf.js" type="text/javascript"></script>    </body>
+</html>
